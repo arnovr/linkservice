@@ -4,7 +4,7 @@ namespace HappyCar\Domain\Model;
 
 use Assert\Assertion;
 
-class Link
+final class Link
 {
     /**
      * @var string
