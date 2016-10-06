@@ -1,5 +1,5 @@
 Feature: Update a trackable link
-  Scenario: Create link
+  Scenario: Update link
     Given I have the payload
     """
     {

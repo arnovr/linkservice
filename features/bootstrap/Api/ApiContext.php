@@ -23,6 +23,7 @@ class ApiContext extends KernelWebTestCase implements Context
      */
     public function theTrackableLinkExists($trackableLink)
     {
+        $this->shouldAddTrackableLinkToRepository($trackableLink, "empty", 0);
     }
 
     /**

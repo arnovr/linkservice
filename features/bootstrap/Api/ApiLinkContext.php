@@ -3,9 +3,6 @@
 namespace BehatTests\Api;
 
 use Behat\Behat\Context\Context;
-use LinkService\Domain\Model\Link;
-use LinkService\Domain\Model\TrackableLink;
-use LinkService\Infrastructure\Persistence\InMemory\InMemoryTrackableLinkRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -17,11 +14,6 @@ class ApiLinkContext extends KernelWebTestCase implements Context
      * @var RedirectResponse
      */
     private $response;
-
-    /**
-     * @var InMemoryTrackableLinkRepository
-     */
-    private $service;
 
     public function __construct()
     {
@@ -67,36 +59,13 @@ class ApiLinkContext extends KernelWebTestCase implements Context
     }
 
     /**
-     * @param $trackableLink
-     * @param $link
-     * @param $clicks
-     */
-    private function shouldAddTrackableLinkToRepository($trackableLink, $link, $clicks)
-    {
-        $this->service = new InMemoryTrackableLinkRepository(
-            [
-                TrackableLink::from(
-                    new Link($trackableLink),
-                    new Link($link),
-                    $clicks
-                )
-            ]
-        );
-
-        $this->client->getContainer()->set(
-            'link_service.infrastructure.persistence.trackable_link_repository',
-            $this->service
-        );
-    }
-
-    /**
      * @Given /^the clicks should be incremented for trackable link "([^"]*)"$/
      */
     public function theClicksShouldBeIncrementedForTrackableLink($trackableLink)
     {
         $this->assertSame(
             1,
-            $this->service->getBy($trackableLink)->clicks()
+            $this->trackableLinkRepository->getBy($trackableLink)->clicks()
         );
     }
 }
