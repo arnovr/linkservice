@@ -1,8 +1,8 @@
 <?php
 
 use Behat\Behat\Context\Context;
-use HappyCar\Domain\Model\Link;
-use HappyCar\Domain\Model\TrackableLink;
+use LinkService\Domain\Model\Link;
+use LinkService\Domain\Model\TrackableLink;
 
 /**
  * Defines application features from the specific context.

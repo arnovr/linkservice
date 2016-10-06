@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyCar\Infrastructure\Api\Controller;
+namespace LinkService\Infrastructure\Api\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 

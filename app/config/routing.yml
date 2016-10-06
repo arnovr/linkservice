@@ -1,6 +1,6 @@
 default_route:
   path: /{url}
   defaults:
-    _controller: happy_car.infrastructure.api.controller.redirect_controller:redirectAction
+    _controller: link_service.infrastructure.api.controller.redirect_controller:redirectAction
   requirements:
     url: ".*"

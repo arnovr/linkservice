@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyCar\Domain\Model;
+namespace LinkService\Domain\Model;
 
 final class TrackableLink
 {

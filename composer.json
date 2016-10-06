@@ -1,14 +1,14 @@
 {
-    "name": "happycar/linking-the-standardedition",
+    "name": "linkservice/linking-the-standardedition",
     "license": "MIT",
     "type": "project",
-    "description": "The happycar assignment",
+    "description": "The link service assignment",
     "autoload": {
-        "psr-4": { "HappyCar\\": "src/" },
+        "psr-4": { "LinkService\\": "src/" },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "autoload-dev": {
-        "psr-4": { "Tests\\": "tests/" }
+        "psr-4": { "Tests\\LinkService\\": "tests/" }
     },
     "require": {
         "php": ">=5.5.9",
