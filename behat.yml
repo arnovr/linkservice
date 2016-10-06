@@ -1,0 +1,8 @@
+default:
+  suites:
+    domain:
+      paths:    [ %paths.base%/features ]
+      contexts: [ LinkContext ]
+    ui:
+      paths:    [ %paths.base%/features ]
+      contexts: [ ApiLinkContext ]
