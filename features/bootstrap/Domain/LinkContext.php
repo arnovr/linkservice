@@ -1,8 +1,10 @@
 <?php
+namespace BehatTests\Domain;
 
 use Behat\Behat\Context\Context;
 use LinkService\Domain\Model\Link;
 use LinkService\Domain\Model\TrackableLink;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Defines application features from the specific context.

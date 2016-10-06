@@ -1,8 +1,11 @@
 default:
   suites:
-    domain:
-      paths:    [ %paths.base%/features ]
-      contexts: [ LinkContext ]
-    ui:
-      paths:    [ %paths.base%/features ]
-      contexts: [ ApiLinkContext ]
+    transformlink_domain:
+      paths:    [ %paths.base%/features/TransformLink ]
+      contexts: [ BehatTests\Domain\LinkContext]
+    transformlink_api:
+      paths:    [ %paths.base%/features/TransformLink ]
+      contexts: [ BehatTests\Api\ApiLinkContext ]
+    createlink_api:
+      paths:    [ %paths.base%/features/CreateLink ]
+      contexts: [ BehatTests\Api\CreateLinkContext ]

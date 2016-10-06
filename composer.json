@@ -4,7 +4,7 @@
     "type": "project",
     "description": "The link service assignment",
     "autoload": {
-        "psr-4": { "LinkService\\": "src/" },
+        "psr-4": { "LinkService\\": "src/", "BehatTests\\": "features/bootstrap/" },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "autoload-dev": {
