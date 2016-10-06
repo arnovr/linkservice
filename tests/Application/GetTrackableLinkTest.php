@@ -24,7 +24,7 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
         $this->inMemoryTrackableLinkRepository = new InMemoryTrackableLinkRepository(
             [
                 TrackableLink::from(
-                    new Link('http://www.google.com/something'),
+                    new Link('some/awesome/path'),
                     new Link('http://www.fulllink.com'),
                     0
                 )
@@ -42,7 +42,7 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             'http://www.fulllink.com',
-            $this->getTrackableLinkHandler->execute('http://www.google.com/something')
+            $this->getTrackableLinkHandler->execute('some/awesome/path')
         );
     }
 }

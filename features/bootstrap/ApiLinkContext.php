@@ -1,6 +1,9 @@
 <?php
 
 use Behat\Behat\Context\Context;
+use LinkService\Domain\Model\Link;
+use LinkService\Domain\Model\TrackableLink;
+use LinkService\Infrastructure\Persistence\InMemory\InMemoryTrackableLinkRepository;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -32,8 +35,22 @@ class ApiLinkContext extends WebTestCase implements Context
      * @Given /^a trackable link "([^"]*)" which refers to link "([^"]*)" with "([^"]*)" clicks$/
      */
     public function aTrackableLinkWhichRefersToLinkWithClicks($trackableLink, $link, $clicks) {
-        //@todo set up in memory here
-        // $links, $clicks
+        $service = new InMemoryTrackableLinkRepository(
+            [
+                TrackableLink::from(
+                    new Link($trackableLink),
+                    new Link($link),
+                    $clicks
+                )
+            ]
+        );
+
+        $this->client->getContainer()->set(
+            'link_service.infrastructure.persistence.trackable_link_repository',
+            $service
+        );
+
+
         $this->client->request(
             "GET",
             $trackableLink,

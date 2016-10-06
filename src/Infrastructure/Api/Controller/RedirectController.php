@@ -2,18 +2,32 @@
 
 namespace LinkService\Infrastructure\Api\Controller;
 
+use LinkService\Application\GetTrackableLinkHandler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RedirectController
 {
     /**
+     * @var GetTrackableLinkHandler
      */
-    public function __construct()
+    private $getTrackableLinkHandler;
+
+    /**
+     * @param GetTrackableLinkHandler $getTrackableLinkHandler
+     */
+    public function __construct(GetTrackableLinkHandler $getTrackableLinkHandler)
     {
+        $this->getTrackableLinkHandler = $getTrackableLinkHandler;
     }
 
-    public function redirectAction(string $url)
+    /**
+     * @param string $url
+     * @return RedirectResponse
+     */
+    public function redirectAction(string $url): RedirectResponse
     {
-        return new RedirectResponse('https://www.happycar.de/info/versicherung/document/some/very/long/path');
+        return new RedirectResponse(
+            $this->getTrackableLinkHandler->execute($url)
+        );
     }
 }

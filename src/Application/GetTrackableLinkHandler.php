@@ -2,7 +2,6 @@
 
 namespace LinkService\Application;
 
-use LinkService\Domain\Model\Link;
 use LinkService\Domain\Model\TrackableLinkRepository;
 
 class GetTrackableLinkHandler

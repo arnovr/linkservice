@@ -9,3 +9,13 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
   link_service.infrastructure.api.controller.redirect_controller:
     class: LinkService\Infrastructure\Api\Controller\RedirectController
+    arguments:
+      - '@link_service.application.get_trackable_link_handler'
+
+  link_service.application.get_trackable_link_handler:
+    class: LinkService\Application\GetTrackableLinkHandler
+    arguments:
+      - '@link_service.infrastructure.persistence.trackable_link_repository'
+
+  link_service.infrastructure.persistence.trackable_link_repository:
+    class: stdClass

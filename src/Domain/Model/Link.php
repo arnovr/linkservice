@@ -2,8 +2,6 @@
 
 namespace LinkService\Domain\Model;
 
-use Assert\Assertion;
-
 final class Link
 {
     /**
@@ -15,8 +13,6 @@ final class Link
      */
     public function __construct(string $url)
     {
-        Assertion::url($url);
-
         $this->url = $url;
     }
 
