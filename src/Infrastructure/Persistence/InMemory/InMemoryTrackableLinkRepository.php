@@ -2,7 +2,6 @@
 namespace LinkService\Infrastructure\Persistence\InMemory;
 
 use Assert\Assertion;
-use LinkService\Domain\Model\Link;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Domain\Model\TrackableLinkRepository;
 
@@ -13,8 +12,6 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
      */
     private $trackableLinks;
 
-    /**
-     */
     public function __construct(array $trackableLinks)
     {
         Assertion::allIsInstanceOf($trackableLinks, TrackableLink::class);
@@ -22,15 +19,15 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
         $this->trackableLinks = $trackableLinks;
     }
 
-    public function getBy(Link $link): TrackableLink
+    public function getBy(string $link): TrackableLink
     {
-        return array_filter(
+        $data = array_filter(
             $this->trackableLinks,
-            function (TrackableLink $trackableLink) use ($link){
-                if ( $trackableLink->link() == $link) {
-                    return $link;
-                }
+            function (TrackableLink $trackableLink) use ($link) {
+                return (string) $trackableLink->trackableLink() === $link;
             }
         );
+
+        return array_shift($data);
     }
 }

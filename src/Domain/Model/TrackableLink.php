@@ -59,8 +59,11 @@ final class TrackableLink
         return $this->clicks;
     }
 
-    public function link()
+    /**
+     * @return Link
+     */
+    public function trackableLink()
     {
-        return $this->link;
+        return $this->trackableLink;
     }
 }

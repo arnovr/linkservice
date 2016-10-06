@@ -25,7 +25,7 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
             [
                 TrackableLink::from(
                     new Link('http://www.google.com/something'),
-                    new Link('http://www.stub.com'),
+                    new Link('http://www.fulllink.com'),
                     0
                 )
             ]
@@ -40,11 +40,9 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldReturnUrl()
     {
-        $link = 'http://www.google.com/something';
-
         $this->assertSame(
-            $link,
-            $this->getTrackableLinkHandler->execute()
+            'http://www.fulllink.com',
+            $this->getTrackableLinkHandler->execute('http://www.google.com/something')
         );
     }
 }
