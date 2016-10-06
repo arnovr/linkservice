@@ -48,7 +48,6 @@ class LinkContext extends PHPUnit_Framework_TestCase implements Context
         $this->assertSame((string) $this->result, $link);
     }
 
-
     /**
      * @Given /^the clicks should be incremented for trackable link "([^"]*)"$/
      */

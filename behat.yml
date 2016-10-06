@@ -6,6 +6,6 @@ default:
     transformlink_api:
       paths:    [ %paths.base%/features/TransformLink ]
       contexts: [ BehatTests\Api\ApiLinkContext ]
-    createlink_api:
-      paths:    [ %paths.base%/features/CreateLink ]
-      contexts: [ BehatTests\Api\CreateLinkContext ]
+    crud_api:
+      paths:    [ %paths.base%/features/crud ]
+      contexts: [ BehatTests\Api\ApiContext ]

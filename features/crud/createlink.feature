@@ -1,5 +1,5 @@
 Feature: Create a trackable link
-  Scenario: Transform link
+  Scenario: Create link
     Given I have the payload
     """
     {
