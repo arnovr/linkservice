@@ -5,7 +5,7 @@ nginx:
     links:
         - fpm
 fpm:
-    image: php:fpm
+    image: php:7.0-fpm
     ports:
         - "9000:9000"
 
