@@ -1,3 +1,4 @@
+@delete
 Feature: Delete an existing trackable link
   Background:
     Given The trackable link "abc123/helloworld/andsomethingelse" exists

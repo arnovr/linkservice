@@ -1,4 +1,22 @@
-default_route:
+create_link:
+  path: /api/link
+  methods: POST
+  defaults:
+    _controller: link_service.infrastructure.api.controller.link_controller:createAction
+
+update_link:
+  path: /api/link
+  methods: PUT
+  defaults:
+    _controller: link_service.infrastructure.api.controller.link_controller:updateAction
+
+delete_link:
+  path: /api/link
+  methods: DELETE
+  defaults:
+    _controller: link_service.infrastructure.api.controller.link_controller:deleteAction
+
+transform_route:
   path: /{url}
   defaults:
     _controller: link_service.infrastructure.api.controller.redirect_controller:redirectAction

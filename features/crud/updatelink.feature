@@ -1,4 +1,7 @@
+@update
 Feature: Update a trackable link
+  Background:
+    Given The trackable link "abc123/helloworld/andsomethingelse" exists
   Scenario: Update link
     Given I have the payload
     """

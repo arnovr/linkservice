@@ -12,6 +12,9 @@ services:
     arguments:
       - '@link_service.application.get_trackable_link_handler'
 
+  link_service.infrastructure.api.controller.link_controller:
+    class: LinkService\Infrastructure\Api\Controller\LinkController
+
   link_service.application.get_trackable_link_handler:
     class: LinkService\Application\GetTrackableLinkHandler
     arguments:

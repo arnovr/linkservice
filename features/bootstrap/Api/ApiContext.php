@@ -55,7 +55,7 @@ class ApiContext extends KernelWebTestCase implements Context
     public function theResponseStatusCodeShouldBe($statusCode)
     {
         $this->assertSame(
-            $statusCode,
+            (int) $statusCode,
             $this->response->getStatusCode()
         );
     }
