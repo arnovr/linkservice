@@ -25,6 +25,11 @@ class ApiLinkContext extends WebTestCase implements Context
      */
     private $response;
 
+    /**
+     * @var InMemoryTrackableLinkRepository
+     */
+    private $service;
+
     public function __construct()
     {
         $this->client = self::createClient();
@@ -35,21 +40,7 @@ class ApiLinkContext extends WebTestCase implements Context
      * @Given /^a trackable link "([^"]*)" which refers to link "([^"]*)" with "([^"]*)" clicks$/
      */
     public function aTrackableLinkWhichRefersToLinkWithClicks($trackableLink, $link, $clicks) {
-        $service = new InMemoryTrackableLinkRepository(
-            [
-                TrackableLink::from(
-                    new Link($trackableLink),
-                    new Link($link),
-                    $clicks
-                )
-            ]
-        );
-
-        $this->client->getContainer()->set(
-            'link_service.infrastructure.persistence.trackable_link_repository',
-            $service
-        );
-
+        $this->shouldAddTrackableLinkToRepository($trackableLink, $link, $clicks);
 
         $this->client->request(
             "GET",
@@ -83,10 +74,36 @@ class ApiLinkContext extends WebTestCase implements Context
     }
 
     /**
-     * @Given /^the clicks should be incremented$/
+     * @param $trackableLink
+     * @param $link
+     * @param $clicks
      */
-    public function theClicksShouldBeIncremented()
+    private function shouldAddTrackableLinkToRepository($trackableLink, $link, $clicks)
     {
-        //@todo
+        $this->service = new InMemoryTrackableLinkRepository(
+            [
+                TrackableLink::from(
+                    new Link($trackableLink),
+                    new Link($link),
+                    $clicks
+                )
+            ]
+        );
+
+        $this->client->getContainer()->set(
+            'link_service.infrastructure.persistence.trackable_link_repository',
+            $this->service
+        );
+    }
+
+    /**
+     * @Given /^the clicks should be incremented for trackable link "([^"]*)"$/
+     */
+    public function theClicksShouldBeIncrementedForTrackableLink($trackableLink)
+    {
+        $this->assertSame(
+            1,
+            $this->service->getBy($trackableLink)->clicks()
+        );
     }
 }

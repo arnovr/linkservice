@@ -4,4 +4,4 @@ Feature: transform a link into a trackable link
   Scenario: Transform link
     When requesting the link
     Then the link should be "https://www.happycar.de/info/versicherung/document/some/very/long/path"
-    And the clicks should be incremented
+    And the clicks should be incremented for trackable link "abc123/helloworld/andsomethingelse"
