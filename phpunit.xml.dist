@@ -17,15 +17,13 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-
     <filter>
-        <whitelist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
             <directory>src</directory>
-            <exclude>
-                <directory>src/*Bundle/Resources</directory>
-                <directory>src/*/*Bundle/Resources</directory>
-                <directory>src/*/Bundle/*Bundle/Resources</directory>
-            </exclude>
         </whitelist>
     </filter>
+    <listeners>
+        <listener class='Mockery\Adapter\Phpunit\TestListener'
+                  file='./vendor/mockery/mockery/library/Mockery/Adapter/Phpunit/TestListener.php'/>
+    </listeners>
 </phpunit>
