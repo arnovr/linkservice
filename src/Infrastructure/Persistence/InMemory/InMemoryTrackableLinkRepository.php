@@ -43,7 +43,7 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
         if (is_null($returnLink)) {
             throw TrackableLinkNotFound::fromTrackableLink($trackableLink);
         }
-        return $returnLink;
+        return clone $returnLink;
     }
 
     /**

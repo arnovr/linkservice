@@ -45,4 +45,20 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
             $this->getTrackableLinkHandler->execute('some/awesome/path')
         );
     }
+
+
+    /**
+     * @test
+     */
+    public function shouldIncrementNumberOfClicks()
+    {
+        $path = "some/awesome/path";
+
+        $this->getTrackableLinkHandler->execute($path);
+
+        $this->assertSame(
+            1,
+            $this->inMemoryTrackableLinkRepository->getBy($path)->clicks()
+        );
+    }
 }
