@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace LinkService\Domain\Model;
 
@@ -19,7 +20,7 @@ final class Link
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->url;
     }

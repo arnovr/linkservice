@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace LinkService\Infrastructure\Api\Controller;
 
@@ -49,10 +50,10 @@ class UpdateLinkController
     }
 
     /**
-     * @param $payload
+     * @param array $payload
      * @return UpdateLinkCommand
      */
-    private function createUpdateLinkCommandFromPayload($payload): UpdateLinkCommand
+    private function createUpdateLinkCommandFromPayload(array $payload): UpdateLinkCommand
     {
         Assertion::notEmpty($payload['link'] ?? '', 'Link is not set');
         Assertion::notEmpty($payload['trackableLink'] ?? '', 'trackableLink is not set');
