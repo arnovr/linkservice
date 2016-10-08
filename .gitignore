@@ -1,5 +1,5 @@
 .idea
-/app/config/parameters.yml
+#/app/config/parameters.yml
 /build/
 /var/*
 !/var/cache
