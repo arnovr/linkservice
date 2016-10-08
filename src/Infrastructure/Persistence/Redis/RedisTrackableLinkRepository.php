@@ -1,6 +1,5 @@
 <?php
 
-
 namespace LinkService\Infrastructure\Persistence\Redis;
 
 use LinkService\Domain\Model\Link;

@@ -14,6 +14,9 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
      */
     private $trackableLinks;
 
+    /**
+     * @param array $trackableLinks
+     */
     public function __construct(array $trackableLinks)
     {
         Assertion::allIsInstanceOf($trackableLinks, TrackableLink::class);
@@ -47,7 +50,6 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
      */
     public function save(TrackableLink $trackableLink)
     {
-        // TODO: Implement save() method.
     }
 
     /**
@@ -55,6 +57,5 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
      */
     public function delete(TrackableLink $trackableLink)
     {
-        // TODO: Implement save() method.
     }
 }
