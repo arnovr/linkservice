@@ -1,8 +1,6 @@
 <?php
 
-
 namespace LinkService\Application;
-
 
 use LinkService\Domain\Model\TrackableLinkRepository;
 

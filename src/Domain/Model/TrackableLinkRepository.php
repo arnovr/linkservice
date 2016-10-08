@@ -6,6 +6,7 @@ interface TrackableLinkRepository
 {
     /**
      * @param string $trackableLink
+     * @throws TrackableLinkNotFound
      * @return TrackableLink
      */
     public function getBy(string $trackableLink): TrackableLink;

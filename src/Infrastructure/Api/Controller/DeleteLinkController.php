@@ -5,9 +5,11 @@ namespace LinkService\Infrastructure\Api\Controller;
 use Assert\Assertion;
 use Assert\InvalidArgumentException;
 use LinkService\Application\DeleteLinkHandler;
+use LinkService\Domain\Model\TrackableLinkNotFound;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DeleteLinkController
 {
@@ -38,10 +40,13 @@ class DeleteLinkController
             $this->deleteLinkHandler->delete(
                 $payload['trackableLink']
             );
+
+            return new Response('', Response::HTTP_NO_CONTENT);
+        } catch ( TrackableLinkNotFound $e) {
+            throw new NotFoundHttpException($e->getMessage());
         } catch ( InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
-        return new Response('', Response::HTTP_NO_CONTENT);
     }
 }

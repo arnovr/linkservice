@@ -20,4 +20,4 @@ Feature: Delete an existing trackable link
     }
     """
     When I request "DELETE /api/link"
-    Then the response status code should be 400
+    Then the response status code should be 404
