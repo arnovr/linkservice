@@ -4,5 +4,14 @@ namespace LinkService\Domain\Model;
 
 interface TrackableLinkRepository
 {
-    public function getBy(string $link): TrackableLink;
+    /**
+     * @param string $trackableLink
+     * @return TrackableLink
+     */
+    public function getBy(string $trackableLink): TrackableLink;
+
+    /**
+     * @param TrackableLink $trackableLink
+     */
+    public function save(TrackableLink $trackableLink);
 }

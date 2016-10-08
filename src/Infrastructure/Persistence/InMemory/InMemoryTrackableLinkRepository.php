@@ -19,15 +19,23 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
         $this->trackableLinks = $trackableLinks;
     }
 
-    public function getBy(string $link): TrackableLink
+    public function getBy(string $trackableLink): TrackableLink
     {
         $data = array_filter(
             $this->trackableLinks,
-            function (TrackableLink $trackableLink) use ($link) {
-                return (string) $trackableLink->trackableLink() === $link;
+            function (TrackableLink $link) use ($trackableLink) {
+                return (string) $link->trackableLink() === $trackableLink;
             }
         );
 
         return array_shift($data);
+    }
+
+    /**
+     * @param TrackableLink $trackableLink
+     */
+    public function save(TrackableLink $trackableLink)
+    {
+        // TODO: Implement save() method.
     }
 }
