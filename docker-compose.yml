@@ -24,7 +24,7 @@ redis:
 mysql:
     ports:
         - "3306:3306"
-    image: mysql
+    build: docker/mysql
     volumes:
       - "./.data/db:/var/lib/mysql"
     restart: always

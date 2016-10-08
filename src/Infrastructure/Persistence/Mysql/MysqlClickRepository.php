@@ -32,7 +32,7 @@ class MysqlClickRepository implements ClickRepository
         );
         $statement->execute(
             [
-                'created' => date("d-m-Y H:i:s"),
+                'created' => date("Y-m-d H:i:s"),
                 'trackable_link' => (string) $trackableLink->trackableLink()
             ]
         );
