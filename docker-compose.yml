@@ -7,10 +7,15 @@ nginx:
 fpm:
     ports:
         - "9000:9000"
-
+    links:
+        - redis
     build: docker/php-fpm
     # seems like fpm receive the full path from nginx
     # and try to find the files in this dock, so it must
     # be the same as nginx.root
     volumes:
        - ./:/var/www/html
+redis:
+    ports:
+        - "6379:6379"
+    image: redis
