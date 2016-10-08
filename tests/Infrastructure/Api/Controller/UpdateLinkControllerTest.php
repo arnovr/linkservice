@@ -6,10 +6,12 @@ namespace Tests\LinkService\Infrastructure\Api;
 
 use LinkService\Application\Command\UpdateLinkCommand;
 use LinkService\Application\UpdateLinkHandler;
+use LinkService\Domain\Model\TrackableLinkNotFound;
 use LinkService\Infrastructure\Api\Controller\UpdateLinkController;
 use Mockery;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UpdateLinkControllerTest extends \PHPUnit_Framework_TestCase
 {
@@ -48,6 +50,20 @@ class UpdateLinkControllerTest extends \PHPUnit_Framework_TestCase
             ));
 
         $this->assertSame(204, $response->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldThrowExceptionWhenTrackableLinkCouldNotBeFound()
+    {
+        $this->setExpectedException(NotFoundHttpException::class);
+
+        $request = Mockery::mock(Request::class);
+        $request->shouldReceive('getContent')->andReturn('{"trackableLink": "abc123/helloworld/notexistent", "link" : "https://www.url.com/document/some/very/long/path"}');
+        $this->updateLinkHandler->shouldReceive('update')->andThrow(TrackableLinkNotFound::class);
+
+        $this->controller->updateAction($request);
     }
 
     /**

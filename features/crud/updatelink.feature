@@ -22,4 +22,4 @@ Feature: Update a trackable link
     }
     """
     When I request "PUT /api/link"
-    Then the response status code should be 400
+    Then the response status code should be 404
