@@ -6,6 +6,8 @@
 ````
 
 
+@TODO: Fix mysql push het aantal clicks gedoe
+
 Choices:
 - Redis
 - Symfony 3
@@ -13,3 +15,4 @@ Choices:
 - minimal link tracking
 - mysql
 - docker compose
+- nooit verwijderen uit mysql, want history
