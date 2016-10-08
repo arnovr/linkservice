@@ -4,6 +4,7 @@
 namespace Tests\LinkService\Infrastructure\Api;
 
 
+use LinkService\Application\DeleteLinkHandler;
 use LinkService\Infrastructure\Api\Controller\DeleteLinkController;
 use Mockery;
 use Symfony\Component\HttpFoundation\Request;

@@ -20,7 +20,6 @@ class CreateLinkController
     private $createLinkHandler;
 
     /**
-     * CreateLinkController constructor.
      * @param CreateLinkHandler $createLinkHandler
      */
     public function __construct(CreateLinkHandler $createLinkHandler)

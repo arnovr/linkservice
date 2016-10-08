@@ -20,7 +20,6 @@ class UpdateLinkController
     private $updateLinkHandler;
 
     /**
-     * UpdateLinkController constructor.
      * @param UpdateLinkHandler $updateLinkHandler
      */
     public function __construct(UpdateLinkHandler $updateLinkHandler)
