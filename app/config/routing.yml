@@ -14,7 +14,7 @@ delete_link:
   path: /api/link
   methods: DELETE
   defaults:
-    _controller: link_service.infrastructure.api.controller.delete_link_controllerr:deleteAction
+    _controller: link_service.infrastructure.api.controller.delete_link_controller:deleteAction
 
 transform_route:
   path: /{url}
