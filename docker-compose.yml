@@ -9,6 +9,7 @@ fpm:
         - "9000:9000"
     links:
         - redis
+        - mysql
     build: docker/php-fpm
     # seems like fpm receive the full path from nginx
     # and try to find the files in this dock, so it must
@@ -16,6 +17,19 @@ fpm:
     volumes:
        - ./:/var/www/html
 redis:
+    restart: always
     ports:
         - "6379:6379"
     image: redis
+mysql:
+    ports:
+        - "3306:3306"
+    image: mysql
+    volumes:
+      - "./.data/db:/var/lib/mysql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: linkservice
+      MYSQL_DATABASE: linkservice
+      MYSQL_USER: linkservice
+      MYSQL_PASSWORD: linkservice

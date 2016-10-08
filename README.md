@@ -12,3 +12,4 @@ Choices:
 
 - minimal link tracking
 - mysql
+- docker compose
