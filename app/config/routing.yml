@@ -2,19 +2,19 @@ create_link:
   path: /api/link
   methods: POST
   defaults:
-    _controller: link_service.infrastructure.api.controller.link_controller:createAction
+    _controller: link_service.infrastructure.api.controller.create_link_controller:createAction
 
 update_link:
   path: /api/link
   methods: PUT
   defaults:
-    _controller: link_service.infrastructure.api.controller.link_controller:updateAction
+    _controller: link_service.infrastructure.api.controller.update_link_controller:updateAction
 
 delete_link:
   path: /api/link
   methods: DELETE
   defaults:
-    _controller: link_service.infrastructure.api.controller.link_controller:deleteAction
+    _controller: link_service.infrastructure.api.controller.delete_link_controllerr:deleteAction
 
 transform_route:
   path: /{url}
