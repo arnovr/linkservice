@@ -30,7 +30,8 @@
         "phpunit/phpunit": "^4.8",
         "mockery/mockery": "^0.9.5",
         "behat/behat": "^3.2",
-        "squizlabs/php_codesniffer": "^2.7"
+        "squizlabs/php_codesniffer": "^2.7",
+        "phpmd/phpmd": "^2.4"
     },
     "scripts": {
         "post-install-cmd": [
