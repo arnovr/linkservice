@@ -51,6 +51,14 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
      */
     public function save(TrackableLink $trackableLink)
     {
+        $this->trackableLinks = array_filter(
+            $this->trackableLinks,
+            function (TrackableLink $link) use ($trackableLink) {
+                return (string) $link->trackableLink() !== (string) $trackableLink->trackableLink();
+            }
+        );
+
+        array_push($this->trackableLinks, $trackableLink);
     }
 
     /**

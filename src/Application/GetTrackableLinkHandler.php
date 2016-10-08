@@ -27,6 +27,9 @@ class GetTrackableLinkHandler
     public function execute(string $url): string
     {
         $trackableLink = $this->trackableLinkRepository->getBy($url);
-        return (string) $trackableLink->requestLink();
+        $link = (string) $trackableLink->requestLink();
+        $this->trackableLinkRepository->save($trackableLink);
+
+        return $link;
     }
 }
