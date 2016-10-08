@@ -55,7 +55,7 @@ class CreateLinkControllerTest extends \PHPUnit_Framework_TestCase
             ['{}'],
             ['{"link" : "https://www.url.com/document/some/very/long/path"}'],
             ['{"trackableLink": "abc123/helloworld/somepath"}'],
-            ['{"trackableLink": "abc123/helloworld/somepath", "link" : "https://www.url/document/some/very/long/path"}']
+            ['{"trackableLink": "abc123/helloworld/somepath", "link" : "https://url/document/some/very/long/path"}']
         ];
     }
 }

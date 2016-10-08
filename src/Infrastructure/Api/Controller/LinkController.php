@@ -14,12 +14,6 @@ class LinkController
     public function __construct()
     {
     }
-
-    public function createAction(): Response
-    {
-        return new Response('', Response::HTTP_CREATED);
-    }
-
     public function updateAction(): Response
     {
         return new Response('', Response::HTTP_NO_CONTENT);
