@@ -11,7 +11,7 @@ services:
 
   link_service.infrastructure.api.controller.delete_link_controller:
     class: LinkService\Infrastructure\Api\Controller\DeleteLinkController
-      arguments:
+    arguments:
       - '@link_service.application.delete_link_handler'
 
   link_service.infrastructure.api.controller.update_link_controller:
