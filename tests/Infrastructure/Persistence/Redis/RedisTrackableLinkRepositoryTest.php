@@ -33,7 +33,6 @@ class RedisTrackableLinkRepositoryTest extends \PHPUnit_Framework_TestCase
      * @test
      */
     public function shouldSaveTrackableLinkToRedis() {
-
         $trackableLink = TrackableLink::from(
             new Link('some/awesome/path'),
             new Link('http://www.fulllink.com'),

@@ -13,11 +13,20 @@ class GetTrackableLinkHandler
     private $trackableLinkRepository;
 
     /**
-     * @param TrackableLinkRepository $trackableLinkRepository
+     * @var ClickRepository
      */
-    public function __construct(TrackableLinkRepository $trackableLinkRepository)
-    {
+    private $clickRepository;
+
+    /**
+     * @param TrackableLinkRepository $trackableLinkRepository
+     * @param ClickRepository $clickRepository
+     */
+    public function __construct(
+        TrackableLinkRepository $trackableLinkRepository,
+        ClickRepository $clickRepository
+    ) {
         $this->trackableLinkRepository = $trackableLinkRepository;
+        $this->clickRepository = $clickRepository;
     }
 
     /**
@@ -28,7 +37,8 @@ class GetTrackableLinkHandler
     {
         $trackableLink = $this->trackableLinkRepository->getBy($url);
         $link = (string) $trackableLink->requestLink();
-        $this->trackableLinkRepository->save($trackableLink);
+
+        $this->clickRepository->add($trackableLink);
 
         return $link;
     }

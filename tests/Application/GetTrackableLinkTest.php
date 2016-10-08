@@ -2,13 +2,20 @@
 
 namespace Tests\LinkService\Application;
 
+use LinkService\Application\ClickRepository;
 use LinkService\Application\GetTrackableLinkHandler;
 use LinkService\Domain\Model\Link;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Infrastructure\Persistence\InMemory\InMemoryTrackableLinkRepository;
+use Mockery;
 
 class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var ClickRepository|\Mockery\Mock
+     */
+    private $clickRepository;
+
     /**
      * @var GetTrackableLinkHandler
      */
@@ -31,8 +38,11 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
+        $this->clickRepository = Mockery::spy(ClickRepository::class);
+
         $this->getTrackableLinkHandler = new GetTrackableLinkHandler(
-            $this->inMemoryTrackableLinkRepository
+            $this->inMemoryTrackableLinkRepository,
+            $this->clickRepository
         );
     }
     /**
@@ -56,9 +66,6 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
 
         $this->getTrackableLinkHandler->execute($path);
 
-        $this->assertSame(
-            1,
-            $this->inMemoryTrackableLinkRepository->getBy($path)->clicks()
-        );
+        $this->clickRepository->shouldHaveReceived('add')->with(Mockery::type(TrackableLink::class));
     }
 }

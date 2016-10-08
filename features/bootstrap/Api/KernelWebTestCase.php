@@ -3,10 +3,12 @@
 
 namespace BehatTests\Api;
 
+use LinkService\Application\ClickRepository;
 use LinkService\Domain\Model\Link;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Domain\Model\TrackableLinkRepository;
 use LinkService\Infrastructure\Persistence\InMemory\InMemoryTrackableLinkRepository;
+use Mockery;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -24,6 +26,11 @@ class KernelWebTestCase extends WebTestCase
      */
     protected $client;
 
+    /**
+     * @var ClickRepository|\Mockery\Mock
+     */
+    protected $clickRepository;
+
     public function __construct()
     {
         $this->client = self::createClient();
@@ -38,7 +45,7 @@ class KernelWebTestCase extends WebTestCase
      * @param $link
      * @param $clicks
      */
-    protected function shouldAddTrackableLinkToRepository($trackableLink, $link, $clicks)
+    protected function shouldAddTrackableLinkRepository($trackableLink, $link, $clicks)
     {
         $this->trackableLinkRepository = new InMemoryTrackableLinkRepository(
             [
@@ -51,6 +58,14 @@ class KernelWebTestCase extends WebTestCase
         );
 
         $this->addRepositoryToContainer($this->trackableLinkRepository);
+    }
+
+    protected function shouldAddClickableRepositoryMock() {
+        $this->clickRepository = Mockery::spy(ClickRepository::class);
+        $this->client->getContainer()->set(
+            'link_service.infrastructure.persistence.mysql.mysql_click_repository',
+            $this->clickRepository
+        );
     }
 
     private function addRepositoryToContainer(TrackableLinkRepository $repository)

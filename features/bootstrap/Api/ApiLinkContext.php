@@ -25,7 +25,8 @@ class ApiLinkContext extends KernelWebTestCase implements Context
      * @Given /^a trackable link "([^"]*)" which refers to link "([^"]*)" with "([^"]*)" clicks$/
      */
     public function aTrackableLinkWhichRefersToLinkWithClicks($trackableLink, $link, $clicks) {
-        $this->shouldAddTrackableLinkToRepository($trackableLink, $link, $clicks);
+        $this->shouldAddTrackableLinkRepository($trackableLink, $link, $clicks);
+        $this->shouldAddClickableRepositoryMock();
 
         $this->client->request(
             "GET",
@@ -63,9 +64,6 @@ class ApiLinkContext extends KernelWebTestCase implements Context
      */
     public function theClicksShouldBeIncrementedForTrackableLink($trackableLink)
     {
-        $this->assertSame(
-            1,
-            $this->trackableLinkRepository->getBy($trackableLink)->clicks()
-        );
+        $this->clickRepository->shouldHaveReceived('add');
     }
 }
