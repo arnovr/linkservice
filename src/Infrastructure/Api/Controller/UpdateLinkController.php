@@ -1,8 +1,6 @@
 <?php
 
-
 namespace LinkService\Infrastructure\Api\Controller;
-
 
 use Assert\Assertion;
 use Assert\InvalidArgumentException;
