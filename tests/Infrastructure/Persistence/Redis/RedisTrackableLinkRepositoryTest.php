@@ -73,7 +73,7 @@ class RedisTrackableLinkRepositoryTest extends \PHPUnit_Framework_TestCase
         $trackableLink = TrackableLink::from(
             new Link('some/awesome/path'),
             new Link('http://www.fulllink.com'),
-            120
+            0
         );
 
         $this->client->shouldReceive('get')->with('some/awesome/path')->andReturn('http://www.fulllink.com')->once();
@@ -99,5 +99,4 @@ class RedisTrackableLinkRepositoryTest extends \PHPUnit_Framework_TestCase
             'some/awesome/path'
         );
     }
-
 }

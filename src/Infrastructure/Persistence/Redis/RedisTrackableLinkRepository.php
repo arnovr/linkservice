@@ -31,24 +31,16 @@ class RedisTrackableLinkRepository implements TrackableLinkRepository
      */
     public function getBy(string $trackableLink): TrackableLink
     {
-        $serializedTrackableLinkDto = $this->client->get($trackableLink);
+        $link = $this->client->get($trackableLink);
 
-        if (empty($serializedTrackableLinkDto)) {
-            throw TrackableLinkNotFound::fromTrackableLink($trackableLink);
-        }
-
-        $trackableLinkDto = @unserialize(
-            $serializedTrackableLinkDto
-        );
-
-        if (empty($trackableLinkDto) || !$trackableLinkDto instanceof TrackableLinkDto) {
+        if (empty($link)) {
             throw TrackableLinkNotFound::fromTrackableLink($trackableLink);
         }
 
         return TrackableLink::from(
             new Link($trackableLink),
-            new Link($trackableLinkDto->link),
-            $trackableLinkDto->clicks
+            new Link($link),
+            0
         );
     }
 
@@ -57,13 +49,9 @@ class RedisTrackableLinkRepository implements TrackableLinkRepository
      */
     public function save(TrackableLink $trackableLink)
     {
-        $trackableLinkDto = new TrackableLinkDto();
-        $trackableLinkDto->link = (string) $trackableLink->link();
-        $trackableLinkDto->clicks = $trackableLink->clicks();
-
         $this->client->set(
             (string) $trackableLink->trackableLink(),
-            serialize($trackableLinkDto)
+            (string) $trackableLink->link()
         );
     }
 
