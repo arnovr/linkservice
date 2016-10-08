@@ -36,12 +36,7 @@ class DeleteLinkControllerTest extends \PHPUnit_Framework_TestCase
         $request->shouldReceive('getContent')->andReturn('{"trackableLink": "abc123/helloworld/somepath"}');
         $response = $this->controller->deleteAction($request);
 
-        $this->deleteLinkHandler->shouldHaveReceived('create')->with(
-            Mockery::on(function(DeleteLinkCommand $command) {
-                $this->assertSame('abc123/helloworld/somepath', $command->trackableLink);
-                return true;
-            }
-            ));
+        $this->deleteLinkHandler->shouldHaveReceived('delete')->with('abc123/helloworld/somepath');
 
         $this->assertSame(204, $response->getStatusCode());
     }
