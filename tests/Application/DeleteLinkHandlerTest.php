@@ -31,7 +31,7 @@ class DeleteLinkHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldCreateLink()
+    public function shouldDeleteLink()
     {
         $trackableLink = 'some/awesome/path';
         $this->repository->shouldReceive('getBy')->with($trackableLink)->andReturn(
