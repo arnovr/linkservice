@@ -7,7 +7,6 @@ namespace Tests\LinkService\Infrastructure\Api;
 use LinkService\Application\GetTrackableLinkHandler;
 use LinkService\Infrastructure\Api\Controller\RedirectController;
 use Mockery;
-use Symfony\Component\HttpFoundation\Request;
 
 class RedirectControllerTest extends \PHPUnit_Framework_TestCase
 {
