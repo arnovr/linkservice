@@ -12,3 +12,14 @@ Feature: Update a trackable link
     """
     When I request "PUT /api/link"
     Then the response status code should be 204
+
+  Scenario: Could not update trackable link
+    Given I have the payload
+    """
+    {
+      "trackableLink": "abc123/helloworld/notexistent",
+      "link" : "https://www.happycar.de/new/path"
+    }
+    """
+    When I request "PUT /api/link"
+    Then the response status code should be 400

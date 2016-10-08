@@ -12,7 +12,6 @@ Feature: Delete an existing trackable link
     When I request "DELETE /api/link"
     Then the response status code should be 204
 
-
   Scenario: Could not delete trackable link
     Given I have the payload
     """
