@@ -1,8 +1,6 @@
 <?php
 
-
 namespace LinkService\Application;
-
 
 use LinkService\Application\Command\CreateLinkCommand;
 use LinkService\Domain\Model\Link;

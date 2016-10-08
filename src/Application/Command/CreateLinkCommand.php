@@ -1,8 +1,6 @@
 <?php
 
-
 namespace LinkService\Application\Command;
-
 
 class CreateLinkCommand
 {

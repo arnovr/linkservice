@@ -1,8 +1,6 @@
 <?php
 
-
 namespace LinkService\Infrastructure\Api\Controller;
-
 
 use Assert\Assertion;
 use Assert\InvalidArgumentException;
@@ -39,7 +37,7 @@ class CreateLinkController
             $this->createLinkHandler->create(
                 $this->createLinkCommandFromPayload($payload)
             );
-        } catch ( InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 

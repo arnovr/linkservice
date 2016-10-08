@@ -1,4 +1,5 @@
 <?php
+
 namespace LinkService\Infrastructure\Persistence\InMemory;
 
 use Assert\Assertion;
@@ -35,7 +36,7 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
         );
 
         $returnLink = array_shift($data);
-        if ( is_null($returnLink) ) {
+        if (is_null($returnLink)) {
             throw TrackableLinkNotFound::fromTrackableLink($trackableLink);
         }
         return $returnLink;

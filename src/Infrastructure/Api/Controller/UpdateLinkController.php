@@ -41,9 +41,9 @@ class UpdateLinkController
             );
 
             return new Response('', Response::HTTP_NO_CONTENT);
-        } catch ( TrackableLinkNotFound $e) {
+        } catch (TrackableLinkNotFound $e) {
             throw new NotFoundHttpException($e->getMessage());
-        } catch ( InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
     }
