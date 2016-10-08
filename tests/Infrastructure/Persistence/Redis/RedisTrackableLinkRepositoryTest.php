@@ -91,6 +91,7 @@ class RedisTrackableLinkRepositoryTest extends \PHPUnit_Framework_TestCase
         $trackableLinkDto = new TrackableLinkDto();
         $trackableLinkDto->link = 'http://www.fulllink.com';
         $trackableLinkDto->clicks = 120;
+
         $this->client->shouldReceive('get')->with('some/awesome/path')->andReturn(serialize($trackableLinkDto))->once();
 
         $this->assertEquals(
@@ -109,6 +110,20 @@ class RedisTrackableLinkRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(TrackableLinkNotFound::class);
 
         $this->client->shouldReceive('get')->with('some/awesome/path')->andReturn("")->once();
+
+        $this->repository->getBy(
+            'some/awesome/path'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function shouldThrowExceptionWhenUnserializeFails() {
+
+        $this->setExpectedException(TrackableLinkNotFound::class);
+
+        $this->client->shouldReceive('get')->with('some/awesome/path')->andReturn('"O:61:"LinkService\Infrastructure\Persistence\Redis\TrackableLinkDto":2:{s:4:"link";s:23:"http://www.fulllink.com";s:6:"clic')->once();
 
         $this->repository->getBy(
             'some/awesome/path'

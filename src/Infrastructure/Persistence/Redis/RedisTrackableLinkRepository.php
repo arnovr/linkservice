@@ -31,8 +31,14 @@ class RedisTrackableLinkRepository implements TrackableLinkRepository
      */
     public function getBy(string $trackableLink): TrackableLink
     {
-        $trackableLinkDto = unserialize(
-            $this->client->get($trackableLink)
+        $serializedTrackableLinkDto = $this->client->get($trackableLink);
+
+        if (empty($serializedTrackableLinkDto)) {
+            throw TrackableLinkNotFound::fromTrackableLink($trackableLink);
+        }
+
+        $trackableLinkDto = @unserialize(
+            $serializedTrackableLinkDto
         );
 
         if (empty($trackableLinkDto) || !$trackableLinkDto instanceof TrackableLinkDto) {
