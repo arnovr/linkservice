@@ -16,3 +16,4 @@ Choices:
 - mysql
 - docker compose
 - nooit verwijderen uit mysql, want history
+- geen doctrine
