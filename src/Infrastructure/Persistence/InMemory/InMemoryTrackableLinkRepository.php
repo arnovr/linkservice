@@ -38,4 +38,12 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
     {
         // TODO: Implement save() method.
     }
+
+    /**
+     * @param TrackableLink $trackableLink
+     */
+    public function delete(TrackableLink $trackableLink)
+    {
+        // TODO: Implement save() method.
+    }
 }

@@ -14,4 +14,9 @@ interface TrackableLinkRepository
      * @param TrackableLink $trackableLink
      */
     public function save(TrackableLink $trackableLink);
+
+    /**
+     * @param TrackableLink $trackableLink
+     */
+    public function delete(TrackableLink $trackableLink);
 }
