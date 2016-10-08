@@ -24,10 +24,6 @@ services:
     arguments:
       - '@link_service.infrastructure.persistence.trackable_link_repository'
 
-  link_service.infrastructure.persistence.trackable_link_repository:
-    class: stdClass
-
-
   link_service.application.create_link_handler:
     class: LinkService\Application\CreateLinkHandler
     arguments:
@@ -42,3 +38,14 @@ services:
     class: LinkService\Application\UpdateLinkHandler
     arguments:
       - '@link_service.infrastructure.persistence.trackable_link_repository'
+
+  link_service.infrastructure.persistence.trackable_link_repository:
+    class: LinkService\Infrastructure\Persistence\Redis\RedisTrackableLinkRepository
+    arguments:
+      - '@redis_client'
+
+  redis_client:
+    class: Predis\Client
+    arguments:
+      - '%redis_dsn%'
+      - { prefix: "linkservice:" }
