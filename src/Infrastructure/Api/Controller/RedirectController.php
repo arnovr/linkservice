@@ -3,22 +3,22 @@ declare(strict_types=1);
 
 namespace LinkService\Infrastructure\Api\Controller;
 
-use LinkService\Application\GetTrackableLinkHandler;
+use LinkService\Application\ReferrerHandler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RedirectController
 {
     /**
-     * @var GetTrackableLinkHandler
+     * @var ReferrerHandler
      */
-    private $getTrackableLinkHandler;
+    private $referrerHandler;
 
     /**
-     * @param GetTrackableLinkHandler $getTrackableLinkHandler
+     * @param ReferrerHandler $referrerHandler
      */
-    public function __construct(GetTrackableLinkHandler $getTrackableLinkHandler)
+    public function __construct(ReferrerHandler $referrerHandler)
     {
-        $this->getTrackableLinkHandler = $getTrackableLinkHandler;
+        $this->referrerHandler = $referrerHandler;
     }
 
     /**
@@ -28,7 +28,7 @@ class RedirectController
     public function redirectAction(string $url): RedirectResponse
     {
         return new RedirectResponse(
-            $this->getTrackableLinkHandler->execute($url)
+            $this->referrerHandler->execute($url)
         );
     }
 }

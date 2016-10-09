@@ -3,14 +3,14 @@
 namespace Tests\LinkService\Application;
 
 use LinkService\Application\ClickRepository;
-use LinkService\Application\GetTrackableLinkHandler;
+use LinkService\Application\ReferrerHandler;
 use LinkService\Domain\Model\Link;
 use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Infrastructure\Persistence\InMemory\InMemoryTrackableLinkRepository;
 use Mockery;
 
-class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
+class ReferrerHandlerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var ClickRepository|\Mockery\Mock
@@ -18,9 +18,9 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
     private $clickRepository;
 
     /**
-     * @var GetTrackableLinkHandler
+     * @var ReferrerHandler
      */
-    private $getTrackableLinkHandler;
+    private $referrerHandler;
 
     /**
      * @var InMemoryTrackableLinkRepository
@@ -41,7 +41,7 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
 
         $this->clickRepository = Mockery::spy(ClickRepository::class);
 
-        $this->getTrackableLinkHandler = new GetTrackableLinkHandler(
+        $this->referrerHandler = new ReferrerHandler(
             $this->inMemoryTrackableLinkRepository,
             $this->clickRepository
         );
@@ -53,7 +53,7 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             'http://www.fulllink.com',
-            $this->getTrackableLinkHandler->execute('some/awesome/path')
+            $this->referrerHandler->execute('some/awesome/path')
         );
     }
 
@@ -63,9 +63,9 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldIncrementNumberOfClicks()
     {
-        $path = "some/awesome/path";
+        $referrer = "some/awesome/path";
 
-        $this->getTrackableLinkHandler->execute($path);
+        $this->referrerHandler->execute($referrer);
 
         $this->clickRepository->shouldHaveReceived('add')->with(Mockery::type(TrackableLink::class));
     }

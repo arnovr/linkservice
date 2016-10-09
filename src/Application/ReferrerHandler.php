@@ -5,7 +5,7 @@ namespace LinkService\Application;
 
 use LinkService\Domain\Model\TrackableLinkRepository;
 
-class GetTrackableLinkHandler
+class ReferrerHandler
 {
     /**
      * @var TrackableLinkRepository
@@ -30,12 +30,12 @@ class GetTrackableLinkHandler
     }
 
     /**
-     * @param string $url
+     * @param string $referrer
      * @return string
      */
-    public function execute(string $url): string
+    public function execute(string $referrer): string
     {
-        $trackableLink = $this->trackableLinkRepository->getBy($url);
+        $trackableLink = $this->trackableLinkRepository->getBy($referrer);
         $link = (string) $trackableLink->requestLink();
 
         $this->clickRepository->add($trackableLink);

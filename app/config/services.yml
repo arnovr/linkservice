@@ -2,7 +2,7 @@ services:
   link_service.infrastructure.api.controller.redirect_controller:
     class: LinkService\Infrastructure\Api\Controller\RedirectController
     arguments:
-      - '@link_service.application.get_trackable_link_handler'
+      - '@link_service.application.referrer_handler'
 
   link_service.infrastructure.api.controller.create_link_controller:
     class: LinkService\Infrastructure\Api\Controller\CreateLinkController
@@ -19,8 +19,8 @@ services:
     arguments:
       - '@link_service.application.update_link_handler'
 
-  link_service.application.get_trackable_link_handler:
-    class: LinkService\Application\GetTrackableLinkHandler
+  link_service.application.referrer_handler:
+    class: LinkService\Application\ReferrerHandler
     arguments:
       - '@link_service.infrastructure.persistence.trackable_link_repository'
       - '@link_service.infrastructure.persistence.mysql.mysql_click_repository'
