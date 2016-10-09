@@ -6,9 +6,9 @@ namespace LinkService\Domain\Model;
 final class TrackableLink
 {
     /**
-     * @var Link
+     * @var Referrer
      */
-    private $trackableLink;
+    private $referrer;
 
     /**
      * @var Link
@@ -21,26 +21,26 @@ final class TrackableLink
     private $clicks;
 
     /**
-     * @param Link $trackableLink
+     * @param Referrer $referrer
      * @param Link $link
      * @param int  $clicks
      */
-    public function __construct(Link $trackableLink, Link $link, int $clicks)
+    public function __construct(Referrer $referrer, Link $link, int $clicks)
     {
-        $this->trackableLink = $trackableLink;
+        $this->referrer = $referrer;
         $this->link = $link;
         $this->clicks = $clicks;
     }
 
     /**
-     * @param Link $trackableLink
+     * @param Referrer $referrer
      * @param Link $link
      * @param int  $clicks
      * @return TrackableLink
      */
-    public static function from(Link $trackableLink, Link $link, int $clicks): self
+    public static function from(Referrer $referrer, Link $link, int $clicks): self
     {
-        return new self($trackableLink, $link, $clicks);
+        return new self($referrer, $link, $clicks);
     }
 
     /**
@@ -61,11 +61,11 @@ final class TrackableLink
     }
 
     /**
-     * @return Link
+     * @return Referrer
      */
-    public function trackableLink(): Link
+    public function referrer(): Referrer
     {
-        return $this->trackableLink;
+        return $this->referrer;
     }
 
     /**

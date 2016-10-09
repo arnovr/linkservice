@@ -6,11 +6,11 @@ namespace LinkService\Domain\Model;
 interface TrackableLinkRepository
 {
     /**
-     * @param string $trackableLink
+     * @param string $referrer
      * @throws TrackableLinkNotFound
      * @return TrackableLink
      */
-    public function getBy(string $trackableLink): TrackableLink;
+    public function getBy(string $referrer): TrackableLink;
 
     /**
      * @param TrackableLink $trackableLink

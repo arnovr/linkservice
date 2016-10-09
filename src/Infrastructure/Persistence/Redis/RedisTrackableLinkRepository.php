@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LinkService\Infrastructure\Persistence\Redis;
 
 use LinkService\Domain\Model\Link;
+use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Domain\Model\TrackableLinkNotFound;
 use LinkService\Domain\Model\TrackableLinkRepository;
@@ -25,20 +26,20 @@ class RedisTrackableLinkRepository implements TrackableLinkRepository
     }
 
     /**
-     * @param string $trackableLink
+     * @param string $referrer
      * @throws TrackableLinkNotFound
      * @return TrackableLink
      */
-    public function getBy(string $trackableLink): TrackableLink
+    public function getBy(string $referrer): TrackableLink
     {
-        $link = $this->client->get($trackableLink);
+        $link = $this->client->get($referrer);
 
         if (empty($link)) {
-            throw TrackableLinkNotFound::fromTrackableLink($trackableLink);
+            throw TrackableLinkNotFound::fromTrackableLink($referrer);
         }
 
         return TrackableLink::from(
-            new Link($trackableLink),
+            new Referrer($referrer),
             new Link($link),
             0
         );
@@ -50,7 +51,7 @@ class RedisTrackableLinkRepository implements TrackableLinkRepository
     public function save(TrackableLink $trackableLink)
     {
         $this->client->set(
-            (string) $trackableLink->trackableLink(),
+            (string) $trackableLink->referrer(),
             (string) $trackableLink->link()
         );
     }
@@ -61,7 +62,7 @@ class RedisTrackableLinkRepository implements TrackableLinkRepository
     public function delete(TrackableLink $trackableLink)
     {
         $this->client->del(
-            (string) $trackableLink->trackableLink()
+            (string) $trackableLink->referrer()
         );
     }
 }

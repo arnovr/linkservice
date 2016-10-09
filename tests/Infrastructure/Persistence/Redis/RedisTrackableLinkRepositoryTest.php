@@ -5,6 +5,7 @@ namespace Tests\LinkService\Infrastructure\Persistence\Redis;
 
 
 use LinkService\Domain\Model\Link;
+use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Domain\Model\TrackableLinkNotFound;
 use LinkService\Infrastructure\Persistence\Redis\RedisTrackableLinkRepository;
@@ -34,7 +35,7 @@ class RedisTrackableLinkRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSaveTrackableLinkToRedis() {
         $trackableLink = TrackableLink::from(
-            new Link('some/awesome/path'),
+            new Referrer('some/awesome/path'),
             new Link('http://www.fulllink.com'),
             120
         );
@@ -52,7 +53,7 @@ class RedisTrackableLinkRepositoryTest extends \PHPUnit_Framework_TestCase
     public function shouldDeleteTrackableLink() {
 
         $trackableLink = TrackableLink::from(
-            new Link('some/awesome/path'),
+            new Referrer('some/awesome/path'),
             new Link('http://www.fulllink.com'),
             120
         );
@@ -70,7 +71,7 @@ class RedisTrackableLinkRepositoryTest extends \PHPUnit_Framework_TestCase
     public function shouldGetTrackableLink() {
 
         $trackableLink = TrackableLink::from(
-            new Link('some/awesome/path'),
+            new Referrer('some/awesome/path'),
             new Link('http://www.fulllink.com'),
             0
         );

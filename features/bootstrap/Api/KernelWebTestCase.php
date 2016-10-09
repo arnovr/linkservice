@@ -5,6 +5,7 @@ namespace BehatTests\Api;
 
 use LinkService\Application\ClickRepository;
 use LinkService\Domain\Model\Link;
+use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Domain\Model\TrackableLinkRepository;
 use LinkService\Infrastructure\Persistence\InMemory\InMemoryTrackableLinkRepository;
@@ -50,7 +51,7 @@ class KernelWebTestCase extends WebTestCase
         $this->trackableLinkRepository = new InMemoryTrackableLinkRepository(
             [
                 TrackableLink::from(
-                    new Link($trackableLink),
+                    new Referrer($trackableLink),
                     new Link($link),
                     $clicks
                 )

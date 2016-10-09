@@ -22,15 +22,15 @@ class ApiLinkContext extends KernelWebTestCase implements Context
     }
 
     /**
-     * @Given /^a trackable link "([^"]*)" which refers to link "([^"]*)" with "([^"]*)" clicks$/
+     * @Given /^a referrer "([^"]*)" which refers to link "([^"]*)" with "([^"]*)" clicks$/
      */
-    public function aTrackableLinkWhichRefersToLinkWithClicks($trackableLink, $link, $clicks) {
-        $this->shouldAddTrackableLinkRepository($trackableLink, $link, $clicks);
+    public function aReferrerWhichRefersToLinkWithClicks($referrer, $link, $clicks) {
+        $this->shouldAddTrackableLinkRepository($referrer, $link, $clicks);
         $this->shouldAddClickableRepositoryMock();
 
         $this->client->request(
             "GET",
-            $trackableLink,
+            $referrer,
             [], [], [],
             '{}'
         );
@@ -60,9 +60,9 @@ class ApiLinkContext extends KernelWebTestCase implements Context
     }
 
     /**
-     * @Given /^the clicks should be incremented for trackable link "([^"]*)"$/
+     * @Given /^the clicks should be incremented for referrer "([^"]*)"$/
      */
-    public function theClicksShouldBeIncrementedForTrackableLink($trackableLink)
+    public function theClicksShouldBeIncrementedForReferrer($referrer)
     {
         $this->clickRepository->shouldHaveReceived('add');
     }

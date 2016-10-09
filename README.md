@@ -14,6 +14,11 @@ composer install
 ./bin/run
 ````
 
+## Testing the services
+````
+ant
+````
+
 ## Choices:
 ### Redis
 It is faster than MySQL. Especially when redirecting, speed is essential. 

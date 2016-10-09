@@ -3,19 +3,19 @@ declare(strict_types=1);
 
 namespace LinkService\Domain\Model;
 
-final class Link
+final class Referrer
 {
     /**
      * @var string
      */
-    private $url;
+    private $referrer;
 
     /**
-     * @param string $url
+     * @param string $referrer
      */
-    public function __construct(string $url)
+    public function __construct(string $referrer)
     {
-        $this->url = $url;
+        $this->referrer = $referrer;
     }
 
     /**
@@ -23,6 +23,6 @@ final class Link
      */
     public function __toString(): string
     {
-        return $this->url;
+        return $this->referrer;
     }
 }

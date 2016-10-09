@@ -26,22 +26,22 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
     }
 
     /**
-     * @param string $trackableLink
+     * @param string $referrer
      * @throws TrackableLinkNotFound
      * @return TrackableLink
      */
-    public function getBy(string $trackableLink): TrackableLink
+    public function getBy(string $referrer): TrackableLink
     {
         $data = array_filter(
             $this->trackableLinks,
-            function (TrackableLink $link) use ($trackableLink) {
-                return (string) $link->trackableLink() === $trackableLink;
+            function (TrackableLink $link) use ($referrer) {
+                return (string) $link->referrer() === $referrer;
             }
         );
 
         $returnLink = array_shift($data);
         if (is_null($returnLink)) {
-            throw TrackableLinkNotFound::fromTrackableLink($trackableLink);
+            throw TrackableLinkNotFound::fromTrackableLink($referrer);
         }
         return clone $returnLink;
     }
@@ -54,7 +54,7 @@ class InMemoryTrackableLinkRepository implements TrackableLinkRepository
         $this->trackableLinks = array_filter(
             $this->trackableLinks,
             function (TrackableLink $link) use ($trackableLink) {
-                return (string) $link->trackableLink() !== (string) $trackableLink->trackableLink();
+                return (string) $link->referrer() !== (string) $trackableLink->referrer();
             }
         );
 

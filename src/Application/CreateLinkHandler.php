@@ -5,6 +5,7 @@ namespace LinkService\Application;
 
 use LinkService\Application\Command\CreateLinkCommand;
 use LinkService\Domain\Model\Link;
+use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Domain\Model\TrackableLinkRepository;
 
@@ -29,7 +30,7 @@ class CreateLinkHandler
     public function create(CreateLinkCommand $createLinkCommand)
     {
         $trackableLink = TrackableLink::from(
-            new Link($createLinkCommand->trackableLink),
+            new Referrer($createLinkCommand->trackableLink),
             new Link($createLinkCommand->link),
             0
         );

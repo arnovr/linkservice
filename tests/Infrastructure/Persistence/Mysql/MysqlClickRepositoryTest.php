@@ -4,6 +4,7 @@ namespace Tests\LinkService\Infrastructure\Persistence\Mysql;
 
 
 use LinkService\Domain\Model\Link;
+use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Infrastructure\Persistence\Mysql\MysqlClickRepository;
 use Mockery;
@@ -45,7 +46,7 @@ class MysqlClickRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->repository->add(
             TrackableLink::from(
-                new Link('some/awesome/path'),
+                new Referrer('some/awesome/path'),
                 new Link('http://www.fulllink.com'),
                 0
             )

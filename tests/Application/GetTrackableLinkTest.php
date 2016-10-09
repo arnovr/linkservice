@@ -5,6 +5,7 @@ namespace Tests\LinkService\Application;
 use LinkService\Application\ClickRepository;
 use LinkService\Application\GetTrackableLinkHandler;
 use LinkService\Domain\Model\Link;
+use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Infrastructure\Persistence\InMemory\InMemoryTrackableLinkRepository;
 use Mockery;
@@ -31,7 +32,7 @@ class GetTrackableLinkTest extends \PHPUnit_Framework_TestCase
         $this->inMemoryTrackableLinkRepository = new InMemoryTrackableLinkRepository(
             [
                 TrackableLink::from(
-                    new Link('some/awesome/path'),
+                    new Referrer('some/awesome/path'),
                     new Link('http://www.fulllink.com'),
                     0
                 )
