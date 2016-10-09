@@ -7,6 +7,7 @@ use LinkService\Application\Command\CreateLinkCommand;
 use LinkService\Domain\Model\Link;
 use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
+use LinkService\Domain\Model\TrackableLinkNotFound;
 use LinkService\Domain\Model\TrackableLinkRepository;
 
 class CreateLinkHandler
@@ -26,11 +27,18 @@ class CreateLinkHandler
 
     /**
      * @param CreateLinkCommand $createLinkCommand
+     * @throws ReferrerExists
      */
     public function create(CreateLinkCommand $createLinkCommand)
     {
+        try {
+            $this->repository->getBy($createLinkCommand->referrer);
+            throw ReferrerExists::fromReferrer($createLinkCommand->referrer);
+        } catch (TrackableLinkNotFound $e) {
+        }
+
         $trackableLink = TrackableLink::from(
-            new Referrer($createLinkCommand->trackableLink),
+            new Referrer($createLinkCommand->referrer),
             new Link($createLinkCommand->link),
             0
         );

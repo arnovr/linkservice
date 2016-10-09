@@ -13,5 +13,5 @@ class CreateLinkCommand
     /**
      * @var string
      */
-    public $trackableLink;
+    public $referrer;
 }

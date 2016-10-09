@@ -7,9 +7,11 @@ use Assert\Assertion;
 use Assert\InvalidArgumentException;
 use LinkService\Application\Command\CreateLinkCommand;
 use LinkService\Application\CreateLinkHandler;
+use LinkService\Application\ReferrerExists;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class CreateLinkController
 {
@@ -38,6 +40,8 @@ class CreateLinkController
             $this->createLinkHandler->create(
                 $this->createLinkCommandFromPayload($payload)
             );
+        } catch (ReferrerExists $e) {
+            throw new ConflictHttpException($e->getMessage());
         } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
@@ -52,12 +56,12 @@ class CreateLinkController
     private function createLinkCommandFromPayload(array $payload): CreateLinkCommand
     {
         Assertion::notEmpty($payload['link'] ?? '', 'Link is not set');
-        Assertion::notEmpty($payload['trackableLink'] ?? '', 'trackableLink is not set');
+        Assertion::notEmpty($payload['referrer'] ?? '', 'referrer is not set');
         Assertion::url($payload['link'], 'link should be a valid url');
 
         $command = new CreateLinkCommand();
         $command->link = $payload['link'];
-        $command->trackableLink = $payload['trackableLink'];
+        $command->referrer = $payload['referrer'];
 
         return $command;
     }
