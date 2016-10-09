@@ -6,7 +6,7 @@
 
 ## Setup
 ````
-composer install
+./bin/setup
 ````
 
 ## Running the service
