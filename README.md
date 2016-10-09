@@ -14,9 +14,43 @@ composer install
 ./bin/run
 ````
 
-## Testing the services
+## Testing the service
 ````
 ant
+````
+
+
+## Using the service
+### Create trackable link:
+POST /api/link
+
+Body:
+````
+{
+  "referrer": "referer/path",
+  "link" : "https://www.url.com/info/versicherung/document/some/very/long/UPDATE"
+}
+````
+
+### Updating a trackable link
+Put /api/link
+
+Body:
+````
+{
+  "referrer": "referer/path",
+  "link" : "https://www.url.com/info/versicherung/document/some/very/long/UPDATE"
+}
+````
+
+### Deleting a trackable link
+DELETE /api/link
+
+Body:
+````
+{
+  "referrer": "referer/path"
+}
 ````
 
 ## Choices:
