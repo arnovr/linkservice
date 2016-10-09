@@ -1,4 +1,3 @@
-@create
 Feature: Create a trackable link
   Scenario: Create link
     Given I have the payload

@@ -1,4 +1,3 @@
-@update
 Feature: Update a referrer
   Background:
     Given The trackable link "abc123/helloworld/andsomethingelse" exists
