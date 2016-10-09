@@ -2,7 +2,7 @@
 Create a RESTful PHP service which is able to transform a http link into a minimized and trackable link. 
 The service should be able to track a click on such a generated link and also redirect the user to the initial URL. The service should run within a Docker Container.
 
-Example: https://www.happycar.de/info/versicherung/document/some/very/long/path will become https://link.happycar.de/abc123
+Example: https://www.url.com/info/versicherung/document/some/very/long/path will become https://link.url.com/abc123
 
 ### Technical Requirements
 - Zend Framework 2/3 or Symfony 2/3

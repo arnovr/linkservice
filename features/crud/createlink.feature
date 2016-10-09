@@ -5,7 +5,7 @@ Feature: Create a trackable link
     """
     {
       "trackableLink": "abc123/helloworld/andsomethingelse",
-      "link" : "https://www.happycar.de/info/versicherung/document/some/very/long/path"
+      "link" : "https://www.url.com/info/versicherung/document/some/very/long/path"
     }
     """
     When I request "POST /api/link"

@@ -7,7 +7,7 @@ Feature: Update a trackable link
     """
     {
       "trackableLink": "abc123/helloworld/andsomethingelse",
-      "link" : "https://www.happycar.de/new/path"
+      "link" : "https://www.url.com/new/path"
     }
     """
     When I request "PUT /api/link"
@@ -18,7 +18,7 @@ Feature: Update a trackable link
     """
     {
       "trackableLink": "abc123/helloworld/notexistent",
-      "link" : "https://www.happycar.de/new/path"
+      "link" : "https://www.url.com/new/path"
     }
     """
     When I request "PUT /api/link"
