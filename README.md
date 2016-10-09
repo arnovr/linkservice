@@ -1,13 +1,9 @@
 # Link-Service
 
-## Requirements
+## prerequisites
 - docker
-- docker compose
-
-## Setup
-````
-./bin/setup
-````
+- composer install (https://getcomposer.org/download/)
+- docker compose (https://docs.docker.com/compose/install/)
 
 ## Running the service
 ````
@@ -18,7 +14,6 @@
 ````
 ant
 ````
-
 
 ## Using the service
 ### Create trackable link:
@@ -75,8 +70,3 @@ PDO is alot more suited on such a simple task.
 
 ### Docker compose
 It is easier....
-
-
-Todos:
-- Cache/log / volume permission problem
-- Setup
