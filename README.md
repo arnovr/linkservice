@@ -4,6 +4,7 @@
 - docker
 - composer install (https://getcomposer.org/download/)
 - docker compose (https://docs.docker.com/compose/install/)
+- ant (http://ant.apache.org/) if you want to run the tests
 
 ## Running the service
 ````
