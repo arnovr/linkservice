@@ -17,6 +17,3 @@ Example: https://www.url.com/info/versicherung/document/some/very/long/path will
 ### Functional Requirements
 - RESTful API (CRUD)
 - Link Tracking (e.g. referral) and Redirection
-
-
-
