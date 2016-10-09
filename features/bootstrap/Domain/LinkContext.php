@@ -34,9 +34,9 @@ class LinkContext extends PHPUnit_Framework_TestCase implements Context
     }
 
     /**
-     * @When /^requesting the link$/
+     * @When /^requesting the referrer$/
      */
-    public function requestingTheLink()
+    public function requestingTheReferrer()
     {
         $this->result = $this->link->requestLink();
     }

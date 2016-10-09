@@ -37,9 +37,9 @@ class ApiLinkContext extends KernelWebTestCase implements Context
     }
 
     /**
-     * @When /^requesting the link$/
+     * @When /^requesting the referrer$/
      */
-    public function requestingTheLink()
+    public function requestingTheReferrer()
     {
         $this->response = $this->client->getResponse();
     }

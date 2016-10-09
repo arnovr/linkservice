@@ -1,10 +1,10 @@
 default:
   suites:
     transformlink_domain:
-      paths:    [ %paths.base%/features/TransformLink ]
+      paths:    [ %paths.base%/features/Referrer ]
       contexts: [ BehatTests\Domain\LinkContext]
     transformlink_api:
-      paths:    [ %paths.base%/features/TransformLink ]
+      paths:    [ %paths.base%/features/Referrer ]
       contexts: [ BehatTests\Api\ApiLinkContext ]
     crud_api:
       paths:    [ %paths.base%/features/crud ]
