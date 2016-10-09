@@ -6,8 +6,6 @@
 ````
 
 
-@TODO: Fix mysql push het aantal clicks gedoe
-
 Choices:
 - Redis
 - Symfony 3
