@@ -23,7 +23,7 @@ Body:
 ````
 {
   "referrer": "referer/path",
-  "link" : "https://www.url.com/info/versicherung/document/some/very/long/UPDATE"
+  "link" : "https://www.url.com/info/document/some/very/long/UPDATE"
 }
 ````
 
@@ -34,7 +34,7 @@ Body:
 ````
 {
   "referrer": "referer/path",
-  "link" : "https://www.url.com/info/versicherung/document/some/very/long/UPDATE"
+  "link" : "https://www.url.com/info/document/some/very/long/UPDATE"
 }
 ````
 
