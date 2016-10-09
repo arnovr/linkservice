@@ -6,6 +6,13 @@
 - composer install (https://getcomposer.org/download/)
 - docker compose (https://docs.docker.com/compose/install/)
 - ant (http://ant.apache.org/) if you want to run the tests
+- PHP , for composer installation only, if you want to run ./bin/setup
+
+## Setup
+This installs composer and runs composer install
+````
+./bin/setup
+````
 
 ## Running the service
 ````
