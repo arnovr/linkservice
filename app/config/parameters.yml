@@ -10,4 +10,4 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: ThisTokenIsNotSoSecretChangeIt
-    redis_dsn: "tcp://redis:6379"
+    redis_dsn: 'tcp://redis:6379'
