@@ -13,5 +13,5 @@ class UpdateLinkCommand
     /**
      * @var string
      */
-    public $trackableLink;
+    public $referrer;
 }

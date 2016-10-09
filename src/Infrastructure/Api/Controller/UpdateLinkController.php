@@ -56,12 +56,12 @@ class UpdateLinkController
     private function createUpdateLinkCommandFromPayload(array $payload): UpdateLinkCommand
     {
         Assertion::notEmpty($payload['link'] ?? '', 'Link is not set');
-        Assertion::notEmpty($payload['trackableLink'] ?? '', 'trackableLink is not set');
+        Assertion::notEmpty($payload['referrer'] ?? '', 'referrer is not set');
         Assertion::url($payload['link'], 'link should be a valid url');
 
         $command = new UpdateLinkCommand();
         $command->link = $payload['link'];
-        $command->trackableLink = $payload['trackableLink'];
+        $command->referrer = $payload['referrer'];
 
         return $command;
     }

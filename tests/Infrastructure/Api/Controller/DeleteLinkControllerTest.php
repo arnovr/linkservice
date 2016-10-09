@@ -36,7 +36,7 @@ class DeleteLinkControllerTest extends \PHPUnit_Framework_TestCase
     public function shouldDeleteLink()
     {
         $request = Mockery::mock(Request::class);
-        $request->shouldReceive('getContent')->andReturn('{"trackableLink": "abc123/helloworld/somepath"}');
+        $request->shouldReceive('getContent')->andReturn('{"referrer": "abc123/helloworld/somepath"}');
         $response = $this->controller->deleteAction($request);
 
         $this->deleteLinkHandler->shouldHaveReceived('delete')->with('abc123/helloworld/somepath');
@@ -52,7 +52,7 @@ class DeleteLinkControllerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(NotFoundHttpException::class);
 
         $request = Mockery::mock(Request::class);
-        $request->shouldReceive('getContent')->andReturn('{"trackableLink": "abc123/helloworld/somepath"}');
+        $request->shouldReceive('getContent')->andReturn('{"referrer": "abc123/helloworld/somepath"}');
         $this->deleteLinkHandler->shouldReceive('delete')->andThrow(TrackableLinkNotFound::class);
 
         $this->controller->deleteAction($request);

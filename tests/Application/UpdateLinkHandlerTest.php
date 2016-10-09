@@ -45,7 +45,7 @@ class UpdateLinkHandlerTest extends \PHPUnit_Framework_TestCase
 
         $command = new UpdateLinkCommand();
 
-        $command->trackableLink = 'some/awesome/path';
+        $command->referrer = 'some/awesome/path';
         $command->link = 'http://www.thisismynewlink.com';
 
         $this->handler->update($command);

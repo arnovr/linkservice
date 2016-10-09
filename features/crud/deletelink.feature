@@ -6,7 +6,7 @@ Feature: Delete an existing trackable link
     Given I have the payload
     """
     {
-      "trackableLink": "abc123/helloworld/andsomethingelse"
+      "referrer": "abc123/helloworld/andsomethingelse"
     }
     """
     When I request "DELETE /api/link"
@@ -16,7 +16,7 @@ Feature: Delete an existing trackable link
     Given I have the payload
     """
     {
-      "trackableLink": "abc123/helloworld/notexistent"
+      "referrer": "abc123/helloworld/notexistent"
     }
     """
     When I request "DELETE /api/link"

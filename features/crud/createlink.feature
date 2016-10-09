@@ -4,7 +4,7 @@ Feature: Create a trackable link
     Given I have the payload
     """
     {
-      "trackableLink": "abc123/helloworld/andsomethingelse",
+      "referrer": "abc123/helloworld/andsomethingelse",
       "link" : "https://www.url.com/info/versicherung/document/some/very/long/path"
     }
     """

@@ -21,12 +21,12 @@ class DeleteLinkHandler
     }
 
     /**
-     * @param string $trackableLink
+     * @param string $referrer
      */
-    public function delete(string $trackableLink)
+    public function delete(string $referrer)
     {
         $this->repository->delete(
-            $this->repository->getBy($trackableLink)
+            $this->repository->getBy($referrer)
         );
     }
 }

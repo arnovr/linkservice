@@ -34,8 +34,8 @@ class DeleteLinkHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDeleteLink()
     {
-        $trackableLink = 'some/awesome/path';
-        $this->repository->shouldReceive('getBy')->with($trackableLink)->andReturn(
+        $referrer = 'some/awesome/path';
+        $this->repository->shouldReceive('getBy')->with($referrer)->andReturn(
             TrackableLink::from(
                 new Referrer('some/awesome/path'),
                 new Link('http://www.fulllink.com'),
@@ -43,7 +43,7 @@ class DeleteLinkHandlerTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->handler->delete($trackableLink);
+        $this->handler->delete($referrer);
 
         $this->repository->shouldHaveReceived('delete')->with(Mockery::type(TrackableLink::class));
     }

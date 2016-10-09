@@ -36,10 +36,10 @@ class DeleteLinkController
         $payload = json_decode($request->getContent(), true);
 
         try {
-            Assertion::notEmpty($payload['trackableLink'] ?? '', 'trackableLink is not set');
+            Assertion::notEmpty($payload['referrer'] ?? '', 'referrer is not set');
 
             $this->deleteLinkHandler->delete(
-                $payload['trackableLink']
+                $payload['referrer']
             );
 
             return new Response('', Response::HTTP_NO_CONTENT);

@@ -28,7 +28,7 @@ class UpdateLinkHandler
      */
     public function update(UpdateLinkCommand $command)
     {
-        $trackableLink = $this->repository->getBy($command->trackableLink);
+        $trackableLink = $this->repository->getBy($command->referrer);
 
         $this->repository->save(
             TrackableLink::from(
