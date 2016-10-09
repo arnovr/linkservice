@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/arnovr/linkservice.svg?branch=master)](https://travis-ci.org/arnovr/linkservice)
 # Link-Service
 
 ## prerequisites

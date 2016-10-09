@@ -1,0 +1,19 @@
+language: php
+php:
+  - 7
+
+cache:
+  directories:
+    - ~/.composer
+
+before_script:
+  - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - composer self-update
+  - composer install --prefer-dist
+
+script:
+  - ant
+
+branches:
+  only:
+    - master
