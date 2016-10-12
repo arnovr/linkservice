@@ -19,6 +19,17 @@ services:
     arguments:
       - '@link_service.application.update_link_handler'
 
+  link_service.infrastructure.web.controller.page_controller:
+    class: LinkService\Infrastructure\Web\Controller\PageController
+    arguments:
+      - '@templating'
+      - '@link_service.application.create_link_handler'
+
+  link_service.infrastructure.web.controller.bundles_router_controller:
+    class: LinkService\Infrastructure\Web\Controller\BundlesRouterController
+    arguments:
+      - '%kernel.root_dir%'
+
   link_service.application.referrer_handler:
     class: LinkService\Application\ReferrerHandler
     arguments:

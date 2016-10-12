@@ -36,6 +36,12 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+      sitename: "%sitename%"
+      siteurl: "%siteurl%"
+      protocol: "%protocol%"
+    paths:
+      "%kernel.root_dir%/../src/Infrastructure/Web/Resources/View": linkservice
 
 # Swiftmailer Configuration
 swiftmailer:

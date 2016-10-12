@@ -19,3 +19,6 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     redis_dsn: "tcp://redis:6379"
+    sitename: "qck.es"
+    siteurl: "qck.es"
+    protocol: "https"

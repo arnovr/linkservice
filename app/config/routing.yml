@@ -16,6 +16,26 @@ delete_link:
   defaults:
     _controller: link_service.infrastructure.api.controller.delete_link_controller:deleteAction
 
+shorten_link:
+  path: /
+  methods: POST
+  defaults:
+    _controller: link_service.infrastructure.web.controller.page_controller:shortenLinkAction
+
+page:
+  path: /
+  methods: GET
+  defaults:
+    _controller: link_service.infrastructure.web.controller.page_controller:viewAction
+
+bundles_router:
+  path: /bundles/{url}
+  methods: GET
+  defaults:
+    _controller: link_service.infrastructure.web.controller.bundles_router_controller:route
+  requirements:
+    url: ".*"
+
 transform_route:
   path: /{url}
   defaults:
