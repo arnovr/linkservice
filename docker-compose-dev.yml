@@ -4,27 +4,25 @@ nginx:
     links:
         - fpm
     build: docker/nginx
-    restart: always
 fpm:
     ports:
         - "9000:9000"
     links:
         - redis
         - mysql
-    build: .
-    restart: always
+    build: docker/php-fpm
+    volumes:
+       - ./:/var/www/html
 redis:
     ports:
         - "6379:6379"
     image: redis
-    restart: always
 mysql:
     ports:
         - "3306:3306"
     build: docker/mysql
     volumes:
       - "./.data/db:/var/lib/mysql"
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: linkservice
       MYSQL_DATABASE: linkservice

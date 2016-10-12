@@ -1,2 +1,2 @@
 #/bin/bash
-docker-compose -f docker-compose.yml -p linkservice up --build
+docker-compose -f docker-compose.yml -p linkservice up --build -d
