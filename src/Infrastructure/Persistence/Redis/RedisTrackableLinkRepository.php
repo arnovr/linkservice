@@ -50,10 +50,12 @@ class RedisTrackableLinkRepository implements TrackableLinkRepository
      */
     public function save(TrackableLink $trackableLink)
     {
+        $key = (string)$trackableLink->referrer();
         $this->client->set(
-            (string) $trackableLink->referrer(),
+            $key,
             (string) $trackableLink->link()
         );
+        $this->client->expire($key, $this->aWeek());
     }
 
     /**
@@ -64,5 +66,13 @@ class RedisTrackableLinkRepository implements TrackableLinkRepository
         $this->client->del(
             (string) $trackableLink->referrer()
         );
+    }
+
+    /**
+     * @return int
+     */
+    private function aWeek(): int
+    {
+        return 60 * 60 * 24 * 7;
     }
 }

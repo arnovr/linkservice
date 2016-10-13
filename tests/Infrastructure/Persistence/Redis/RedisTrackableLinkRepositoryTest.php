@@ -26,7 +26,7 @@ class RedisTrackableLinkRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->client = Mockery::mock(ClientInterface::class);
+        $this->client = Mockery::spy(ClientInterface::class);
         $this->repository = new RedisTrackableLinkRepository($this->client);
     }
 
@@ -34,17 +34,38 @@ class RedisTrackableLinkRepositoryTest extends \PHPUnit_Framework_TestCase
      * @test
      */
     public function shouldSaveTrackableLinkToRedis() {
+        $this->client->shouldReceive('expire');
         $trackableLink = TrackableLink::from(
             new Referrer('some/awesome/path'),
             new Link('http://www.fulllink.com'),
             120
         );
 
-        $this->client->shouldReceive('set')->with('some/awesome/path', 'http://www.fulllink.com')->once();
+        $this->repository->save(
+            $trackableLink
+        );
+
+        $this->client->shouldHaveReceived('set')->with('some/awesome/path', 'http://www.fulllink.com')->once();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSaveTrackableLinkAndSetExpirationToAWeek()
+    {
+        $trackableLink = TrackableLink::from(
+            new Referrer('some/awesome/path'),
+            new Link('http://www.fulllink.com'),
+            120
+        );
 
         $this->repository->save(
             $trackableLink
         );
+
+
+        $this->client->shouldHaveReceived('set')->with('some/awesome/path', 'http://www.fulllink.com')->once();
+        $this->client->shouldHaveReceived('expire')->with('some/awesome/path', 604800);
     }
 
     /**
