@@ -3,13 +3,12 @@
 
 namespace BehatTests\Api;
 
-use LinkService\Application\ClickRepository;
 use LinkService\Domain\Model\Link;
 use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
 use LinkService\Domain\Model\TrackableLinkRepository;
+use LinkService\Infrastructure\Persistence\InMemory\InMemoryEventBus;
 use LinkService\Infrastructure\Persistence\InMemory\InMemoryTrackableLinkRepository;
-use Mockery;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -28,9 +27,9 @@ class KernelWebTestCase extends WebTestCase
     protected $client;
 
     /**
-     * @var ClickRepository|\Mockery\Mock
+     * @var InMemoryEventBus
      */
-    protected $clickRepository;
+    protected $eventBus;
 
     public function __construct()
     {
@@ -44,16 +43,14 @@ class KernelWebTestCase extends WebTestCase
     /**
      * @param $trackableLink
      * @param $link
-     * @param $clicks
      */
-    protected function shouldAddTrackableLinkRepository($trackableLink, $link, $clicks)
+    protected function shouldAddTrackableLinkRepository($trackableLink, $link)
     {
         $this->trackableLinkRepository = new InMemoryTrackableLinkRepository(
             [
                 TrackableLink::from(
                     new Referrer($trackableLink),
-                    new Link($link),
-                    $clicks
+                    new Link($link)
                 )
             ]
         );
@@ -61,11 +58,13 @@ class KernelWebTestCase extends WebTestCase
         $this->addRepositoryToContainer($this->trackableLinkRepository);
     }
 
-    protected function shouldAddClickableRepositoryMock() {
-        $this->clickRepository = Mockery::spy(ClickRepository::class);
+    protected function shouldAddEventBus()
+    {
+        $this->eventBus = new InMemoryEventBus();
+
         $this->client->getContainer()->set(
-            'link_service.infrastructure.persistence.mysql.mysql_click_repository',
-            $this->clickRepository
+            '@link_service.infrastructure.persistence.event_bus',
+            $this->eventBus
         );
     }
 

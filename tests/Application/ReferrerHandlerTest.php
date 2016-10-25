@@ -2,8 +2,9 @@
 
 namespace Tests\LinkService\Application;
 
-use LinkService\Application\ClickRepository;
+use LinkService\Application\EventBus\EventBus;
 use LinkService\Application\ReferrerHandler;
+use LinkService\Domain\Model\ClickEvent;
 use LinkService\Domain\Model\Link;
 use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
@@ -12,10 +13,10 @@ use Mockery;
 
 class ReferrerHandlerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ClickRepository|\Mockery\Mock
+    /**\
+     * @var EventBus|\Mockery\Mock
      */
-    private $clickRepository;
+    private $eventBus;
 
     /**
      * @var ReferrerHandler
@@ -33,17 +34,16 @@ class ReferrerHandlerTest extends \PHPUnit_Framework_TestCase
             [
                 TrackableLink::from(
                     new Referrer('some/awesome/path'),
-                    new Link('http://www.fulllink.com'),
-                    0
+                    new Link('http://www.fulllink.com')
                 )
             ]
         );
 
-        $this->clickRepository = Mockery::spy(ClickRepository::class);
+        $this->eventBus = Mockery::spy(EventBus::class);
 
         $this->referrerHandler = new ReferrerHandler(
             $this->inMemoryTrackableLinkRepository,
-            $this->clickRepository
+            $this->eventBus
         );
     }
     /**
@@ -57,16 +57,15 @@ class ReferrerHandlerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      * @test
      */
-    public function shouldIncrementNumberOfClicks()
+    public function shouldAddClickEventToEventBus()
     {
         $referrer = "some/awesome/path";
 
         $this->referrerHandler->execute($referrer);
 
-        $this->clickRepository->shouldHaveReceived('add')->with(Mockery::type(TrackableLink::class));
+        $this->eventBus->shouldHaveReceived('handle')->with(Mockery::type(ClickEvent::class));
     }
 }

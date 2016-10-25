@@ -39,8 +39,7 @@ class CreateLinkHandler
 
         $trackableLink = TrackableLink::from(
             new Referrer($createLinkCommand->referrer),
-            new Link($createLinkCommand->link),
-            0
+            new Link($createLinkCommand->link)
         );
 
         $this->repository->save($trackableLink);

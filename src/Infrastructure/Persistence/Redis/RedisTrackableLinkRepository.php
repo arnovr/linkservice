@@ -40,8 +40,7 @@ class RedisTrackableLinkRepository implements TrackableLinkRepository
 
         return TrackableLink::from(
             new Referrer($referrer),
-            new Link($link),
-            0
+            new Link($link)
         );
     }
 
@@ -50,7 +49,7 @@ class RedisTrackableLinkRepository implements TrackableLinkRepository
      */
     public function save(TrackableLink $trackableLink)
     {
-        $key = (string)$trackableLink->referrer();
+        $key = (string) $trackableLink->referrer();
         $this->client->set(
             $key,
             (string) $trackableLink->link()

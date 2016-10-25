@@ -3,8 +3,12 @@ declare(strict_types=1);
 
 namespace LinkService\Domain\Model;
 
+use LinkService\Domain\RecordsEvents;
+
 final class TrackableLink
 {
+    use RecordsEvents;
+
     /**
      * @var Referrer
      */
@@ -16,31 +20,23 @@ final class TrackableLink
     private $link;
 
     /**
-     * @var int
-     */
-    private $clicks;
-
-    /**
      * @param Referrer $referrer
      * @param Link $link
-     * @param int  $clicks
      */
-    public function __construct(Referrer $referrer, Link $link, int $clicks)
+    public function __construct(Referrer $referrer, Link $link)
     {
         $this->referrer = $referrer;
         $this->link = $link;
-        $this->clicks = $clicks;
     }
 
     /**
      * @param Referrer $referrer
      * @param Link $link
-     * @param int  $clicks
      * @return TrackableLink
      */
-    public static function from(Referrer $referrer, Link $link, int $clicks): self
+    public static function from(Referrer $referrer, Link $link): self
     {
-        return new self($referrer, $link, $clicks);
+        return new self($referrer, $link);
     }
 
     /**
@@ -48,16 +44,14 @@ final class TrackableLink
      */
     public function requestLink(): Link
     {
-        $this->clicks++;
-        return $this->link;
-    }
+        $this->record(
+            new ClickEvent(
+                (string) $this->referrer,
+                (string) $this->link
+            )
+        );
 
-    /**
-     * @return int
-     */
-    public function clicks(): int
-    {
-        return $this->clicks;
+        return $this->link;
     }
 
     /**

@@ -23,7 +23,7 @@ services:
     class: LinkService\Application\ReferrerHandler
     arguments:
       - '@link_service.infrastructure.persistence.trackable_link_repository'
-      - '@link_service.infrastructure.persistence.mysql.mysql_click_repository'
+      - '@link_service.infrastructure.persistence.event_bus'
 
   link_service.application.create_link_handler:
     class: LinkService\Application\CreateLinkHandler
@@ -45,20 +45,11 @@ services:
     arguments:
       - '@redis_client'
 
-  link_service.infrastructure.persistence.mysql.mysql_click_repository:
-    class: LinkService\Infrastructure\Persistence\Mysql\MysqlClickRepository
-    arguments:
-      - '@pdo_client'
+  link_service.infrastructure.persistence.event_bus:
+    class: LinkService\Infrastructure\Persistence\InMemory\InMemoryEventBus
 
   redis_client:
     class: Predis\Client
     arguments:
       - '%redis_dsn%'
       - { prefix: "linkservice:" }
-
-  pdo_client:
-    class: PDO
-    arguments:
-      - 'mysql:host=%database_host%;dbname=%database_name%'
-      - '%database_user%'
-      - '%database_password%'

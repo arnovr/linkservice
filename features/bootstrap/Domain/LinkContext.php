@@ -2,6 +2,7 @@
 namespace BehatTests\Domain;
 
 use Behat\Behat\Context\Context;
+use LinkService\Domain\Model\ClickEvent;
 use LinkService\Domain\Model\Link;
 use LinkService\Domain\Model\Referrer;
 use LinkService\Domain\Model\TrackableLink;
@@ -23,13 +24,12 @@ class LinkContext extends PHPUnit_Framework_TestCase implements Context
     private $result;
 
     /**
-     * @Given /^a referrer "([^"]*)" which refers to link "([^"]*)" with "([^"]*)" clicks$/
+     * @Given /^a referrer "([^"]*)" which refers to link "([^"]*)"$/
      */
-    public function aReferrerWhichRefersToLinkWithClicks($referrer, $link, $clicks) {
+    public function aReferrerWhichRefersToLink($referrer, $link) {
         $this->link = TrackableLink::from(
             new Referrer($referrer),
-            new Link($link),
-            $clicks
+            new Link($link)
         );
     }
 
@@ -50,10 +50,11 @@ class LinkContext extends PHPUnit_Framework_TestCase implements Context
     }
 
     /**
-     * @Given /^the clicks should be incremented for referrer "([^"]*)"$/
+     * @Then /^a click event should have occurred for referrer "([^"]*)"$/
      */
-    public function theClicksShouldBeIncrementedForReferrer($referrer)
+    public function aClickEventShouldHaveOccurredForReferrer($referrer)
     {
-        $this->assertSame($this->link->clicks(), 1);
+        $this->assertCount(1, $this->link->getEvents());
+        $this->assertContainsOnlyInstancesOf(ClickEvent::class, $this->link->getEvents());
     }
 }

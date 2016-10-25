@@ -21,6 +21,7 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <exclude>
                 <file>src/Infrastructure/Persistence/InMemory/InMemoryTrackableLinkRepository.php</file>
+                <file>src/Infrastructure/Persistence/InMemory/InMemoryEventBus.php</file>
             </exclude>
             <directory>src</directory>
         </whitelist>
