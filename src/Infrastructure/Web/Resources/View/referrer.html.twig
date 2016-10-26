@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12"><br />
+                <div class="well">
+                    <label for="referrer">Shortened url</label><br />
+                    <div class="input-group">
+                        <input type="text" class="form-control url_shorter" id="referrer" value="{{ protocol }}://{{ siteurl }}/{{ referrer }}">
+                        <div class="input-group-addon btn" data-clipboard-action="copy" data-clipboard-target="#referrer">
+                            <button><span>Copy</span></button>
+                        </div>
+                    </div><br />
+                    <label for="referrer">Full url</label><br />
+                    <div class="input-group">
+                        <input type="text" class="form-control url_shorter" id="link" value="{{ link }}">
+                        <div class="input-group-addon btn" data-clipboard-action="copy" data-clipboard-target="#link">
+                            <button><span>Copy</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -2,12 +2,196 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{{ sitename }}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link href="{{ asset('bundles/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"/>
+        <style type="text/css">
+            html, body {
+                height: 100%;
+            }
+            body {
+                padding-top: 50px;
+                height: 100%;
+                background: #00A5E3; /* For browsers that do not support gradients */
+                background: -webkit-linear-gradient(#00A5E3, #00C6E3); /* For Safari 5.1 to 6.0 */
+                background: -o-linear-gradient(#00A5E3, #00C6E3); /* For Opera 11.1 to 12.0 */
+                background: -moz-linear-gradient(#00A5E3, #00C6E3); /* For Firefox 3.6 to 15 */
+                background: linear-gradient(#00A5E3, #00C6E3); /* Standard syntax */
+            }
+            label {
+                color: #FFFFFF;
+            }
+            .input-group-addon {
+                padding: 0px;
+            }
+            .input-group-addon button {
+                border-radius: 4px;
+                height: 34px;
+                margin: 0px;
+                margin-right: -10px;
+                border: 0px;
+                background-color: #00A5E3;
+                color: #FFFFFF;
+            }
+            .input-group-addon button:focus {
+                border: 0px;
+            }
+
+
+            .input-group-addon button {
+                border: none;
+                text-align: center;
+                transition: all 0.5s;
+                cursor: pointer;
+            }
+
+            .input-group-addon button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            .input-group-addon button span:after {
+                content: '»';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -10px;
+                transition: 0.5s;
+            }
+
+            .input-group-addon button:hover span {
+                padding-right: 15px;
+            }
+
+            .input-group-addon button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+            .navbar-brand a {
+                cursor: hand;
+            }
+            .url_shorter {
+                border: 0;
+            }
+            .input-group-addon {
+                background-color: #FFF;
+                border: 0px;
+            }
+            .well {
+                border: 0px;
+                background-color: #00C6E3;
+            }
+            .jumbotron {
+                background-color: transparent;
+            }
+
+            .navbar {
+                background-color: transparent;
+                border-color: #00A5E3;
+            }
+            .navbar-inverse .navbar-collapse {
+                border: 0px;
+            }
+            .navbar .navbar-brand {
+                color: #FFF;
+            }
+            .navbar .navbar-brand:hover,
+            .navbar .navbar-brand:focus {
+                color: #FFFFFF;
+            }
+            /* link */
+            .navbar .navbar-nav > li > a {
+                color: #fff;
+            }
+            .navbar .navbar-nav > .active > a:hover,
+            .navbar .navbar-nav > li > a:hover,
+            .navbar .navbar-nav > li > a:focus {
+                text-decoration: underline;
+                background-color: #00C6E3;
+            }
+            .navbar .navbar-nav > .active > a,
+            .navbar .navbar-nav > .active > a:focus {
+                text-decoration: underline;
+                background-color: #00A5E3;
+            }
+
+            /* mobile version */
+            .navbar .navbar-toggle {
+                border-color: #00A5E3;
+            }
+            .navbar .navbar-toggle:hover,
+            .navbar .navbar-toggle:focus {
+                background-color: #00C6E3;
+            }
+            .navbar .navbar-toggle .icon-bar {
+                background-color: #CCC;
+            }
+            @media (max-width: 767px) {
+                .navbar {
+                    border: 0px;
+                }
+                .navbar-collapse {
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                    background-color: #00C6E3;
+                }
+                .navbar .navbar-nav > li > a {
+                    color: #fff;
+                    border-top: 0px;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                    background-color: #00C6E3;
+                }
+            }
+            .row h1 {
+                color: #ffffff;
+            }
+        </style>
     </head>
     <body>
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">{{ sitename }}</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="https://github.com/arnovr/linkservice">GitHub</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+    </div>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h1>Shorten your url</h1>
+                </div>
+            </div>
+        </div>
         {% block body %}{% endblock %}
+    </div>
         {% block javascripts %}{% endblock %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{{ asset('bundles/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/clipboard/clipboard.min.js') }}"></script>    <script>
+        var clipboard = new Clipboard('.btn');
+        clipboard.on('error', function(e) {
+            console.log(e);
+        });
+    </script>
     </body>
 </html>
