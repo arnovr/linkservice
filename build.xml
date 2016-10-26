@@ -2,7 +2,7 @@
 
 <project name="Link service" default="test">
     <target name="test"
-            depends="prepare-environment,phpcs,phpmd,phpunit,behat"/>
+            depends="prepare-environment,phpcs,phpmd,phpunit,behat,checkcodecoverage"/>
 
     <target name="prepare-environment"
             depends="set-test-tree-location">
@@ -62,6 +62,13 @@
         <exec executable="${test-tree-location}/vendor/bin/behat"  failonerror="true">
             <arg line="--config=${test-tree-location}/behat.yml"/>
             <arg line="--colors"/>
+        </exec>
+    </target>
+
+    <target name="checkcodecoverage" description="Check if the codecoverage does not drop below 100%" depends="set-test-tree-location">
+        <exec executable="php"  failonerror="true">
+            <arg line=" ${test-tree-location}/check-codecoverage.php" />
+            <arg line="build/artifacts/logs/clover.xml 100" />
         </exec>
     </target>
 </project>

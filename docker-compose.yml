@@ -9,7 +9,7 @@ fpm:
         - "9000:9000"
     links:
         - redis
-        - mysql
+        - rabbitmq
     build: docker/php-fpm
     # seems like fpm receive the full path from nginx
     # and try to find the files in this dock, so it must
@@ -21,15 +21,16 @@ redis:
     ports:
         - "6379:6379"
     image: redis
-mysql:
-    ports:
-        - "3306:3306"
-    build: docker/mysql
-    volumes:
-      - "./.data/db:/var/lib/mysql"
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: linkservice
-      MYSQL_DATABASE: linkservice
-      MYSQL_USER: linkservice
-      MYSQL_PASSWORD: linkservice
+rabbitmq:
+  image: "rabbitmq:3-management"
+  hostname: "rabbitmq"
+  environment:
+    RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+    RABBITMQ_DEFAULT_USER: "rabbitmq"
+    RABBITMQ_DEFAULT_PASS: "rabbitmq"
+    RABBITMQ_DEFAULT_VHOST: "/"
+  ports:
+    - "15672:15672"
+    - "5672:5672"
+  labels:
+    NAME: "rabbitmq1"

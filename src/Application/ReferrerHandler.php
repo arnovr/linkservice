@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LinkService\Application;
 
+use LinkService\Application\EventBus\EventBus;
 use LinkService\Domain\Model\TrackableLinkRepository;
 
 class ReferrerHandler
@@ -13,20 +14,20 @@ class ReferrerHandler
     private $trackableLinkRepository;
 
     /**
-     * @var ClickRepository
+     * @var EventBus
      */
-    private $clickRepository;
+    private $eventBus;
 
     /**
      * @param TrackableLinkRepository $trackableLinkRepository
-     * @param ClickRepository $clickRepository
+     * @param EventBus                $eventBus
      */
     public function __construct(
         TrackableLinkRepository $trackableLinkRepository,
-        ClickRepository $clickRepository
+        EventBus $eventBus
     ) {
         $this->trackableLinkRepository = $trackableLinkRepository;
-        $this->clickRepository = $clickRepository;
+        $this->eventBus = $eventBus;
     }
 
     /**
@@ -38,7 +39,9 @@ class ReferrerHandler
         $trackableLink = $this->trackableLinkRepository->getBy($referrer);
         $link = (string) $trackableLink->requestLink();
 
-        $this->clickRepository->add($trackableLink);
+        foreach ($trackableLink->getEvents() as $event) {
+            $this->eventBus->handle($event);
+        }
 
         return $link;
     }

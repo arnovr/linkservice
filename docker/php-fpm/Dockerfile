@@ -1,6 +1,6 @@
 FROM php:7.0-fpm
 
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install sockets bcmath
 RUN usermod -u 1000 www-data
 USER www-data
 
