@@ -2,10 +2,12 @@
 
 namespace LinkService\Application\EventBus;
 
+use JsonSerializable;
+
 interface EventBus
 {
     /**
-     * @param object $event
+     * @param JsonSerializable $event
      *
      * @return void
      */

@@ -9,6 +9,7 @@ fpm:
         - "9000:9000"
     links:
         - redis
+        - rabbitmq
     build: docker/php-fpm
     # seems like fpm receive the full path from nginx
     # and try to find the files in this dock, so it must
@@ -20,9 +21,9 @@ redis:
     ports:
         - "6379:6379"
     image: redis
-rabbit1:
+rabbitmq:
   image: "rabbitmq:3-management"
-  hostname: "rabbit1"
+  hostname: "rabbitmq"
   environment:
     RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
     RABBITMQ_DEFAULT_USER: "rabbitmq"

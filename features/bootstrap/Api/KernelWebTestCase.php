@@ -63,7 +63,7 @@ class KernelWebTestCase extends WebTestCase
         $this->eventBus = new InMemoryEventBus();
 
         $this->client->getContainer()->set(
-            '@link_service.infrastructure.persistence.event_bus',
+            'link_service.infrastructure.persistence.event_bus',
             $this->eventBus
         );
     }

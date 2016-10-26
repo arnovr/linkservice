@@ -46,7 +46,9 @@ services:
       - '@redis_client'
 
   link_service.infrastructure.persistence.event_bus:
-    class: LinkService\Infrastructure\Persistence\InMemory\InMemoryEventBus
+    class: LinkService\Infrastructure\Persistence\RabbitMQ\RabbitMQEventBus
+    arguments:
+      - '@old_sound_rabbit_mq.click_producer'
 
   redis_client:
     class: Predis\Client
