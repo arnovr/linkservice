@@ -3,6 +3,7 @@
 namespace BehatTests\Api;
 
 use Behat\Behat\Context\Context;
+use LinkService\Domain\Model\ClickEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -22,11 +23,11 @@ class ApiLinkContext extends KernelWebTestCase implements Context
     }
 
     /**
-     * @Given /^a referrer "([^"]*)" which refers to link "([^"]*)" with "([^"]*)" clicks$/
+     * @Given /^a referrer "([^"]*)" which refers to link "([^"]*)"$/
      */
-    public function aReferrerWhichRefersToLinkWithClicks($referrer, $link, $clicks) {
-        $this->shouldAddTrackableLinkRepository($referrer, $link, $clicks);
-        $this->shouldAddClickableRepositoryMock();
+    public function aReferrerWhichRefersToLink($referrer, $link) {
+        $this->shouldAddTrackableLinkRepository($referrer, $link);
+        $this->shouldAddEventBus();
 
         $this->client->request(
             "GET",
@@ -60,10 +61,10 @@ class ApiLinkContext extends KernelWebTestCase implements Context
     }
 
     /**
-     * @Given /^the clicks should be incremented for referrer "([^"]*)"$/
+     * @Then /^a click event should have occurred for referrer "([^"]*)"$/
      */
-    public function theClicksShouldBeIncrementedForReferrer($referrer)
+    public function aClickEventShouldHaveOccurredForReferrer($referrer)
     {
-        $this->clickRepository->shouldHaveReceived('add');
+        $this->assertContainsOnlyInstancesOf(ClickEvent::class, $this->eventBus->getEvents());
     }
 }

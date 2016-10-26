@@ -33,8 +33,7 @@ class UpdateLinkHandler
         $this->repository->save(
             TrackableLink::from(
                 $trackableLink->referrer(),
-                new Link($command->link),
-                $trackableLink->clicks()
+                new Link($command->link)
             )
         );
     }

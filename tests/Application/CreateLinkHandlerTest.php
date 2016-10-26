@@ -59,8 +59,7 @@ class CreateLinkHandlerTest extends \PHPUnit_Framework_TestCase
         $this->repository->shouldReceive('getBy')->andReturn(
             TrackableLink::from(
                 new Referrer('some/awesome/path'),
-                new Link('http://www.fulllink.com'),
-                0
+                new Link('http://www.fulllink.com')
             )
         );
 
